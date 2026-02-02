@@ -29,7 +29,9 @@ an attempt to write skills with high-signal activation because i didn't want to 
 - `windows-majo` — working on Windows: maps Unix commands to PowerShell equivalents (`tail` → `Get-Content`, etc.)
 - `public-domain-setup-majo` — setting up repos with dual licensing (Unlicense OR 0BSD)
 
-trying not to overbloat the skills as per [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+### sizes
+
+trying not to overbloat the skills as per [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 
 | skill | lines | words | status |
 |-------|-------|-------|--------|
@@ -47,7 +49,7 @@ an attempt to write skills with high-signal activation because i didn't want to 
 | `task-planning-majo` | 266 | 1255 | 🟢 |
 | `windows-majo` | 451 | 1520 | 🟢 |
 
-run `count.py` to update this table.trying to write decent skills
+run `count.py` to update this table.
 
 for whats in a skill: <https://agentskills.io>
 

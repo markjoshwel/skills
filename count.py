@@ -7,7 +7,6 @@ count.py — analyse skill sizes and update README.md
 """
 
 import os
-import re
 from pathlib import Path
 
 
@@ -59,31 +58,47 @@ def generate_table(results: list[dict]) -> str:
 
 
 def update_readme(readme_path: Path, table: str) -> bool:
-    """update README.md with the new table."""
+    """update README.md with the new table using simple string operations."""
     content = readme_path.read_text(encoding="utf-8")
 
-    # find and replace the skills size table section
-    # match from "## skill sizes" until the next "## " (next section)
-    pattern = r"(## skill sizes\n\n)(.*?)(\n## )"
-    replacement = f"\1{table}\n\nrun `count.py` to update this table.\3"
+    # find the markers in the content
+    sizes_header = "### sizes"
+    content_after_table = "for whats in a skill:"
 
-    if re.search(pattern, content, re.DOTALL):
-        new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
-        readme_path.write_text(new_content, encoding="utf-8")
-        return True
-    else:
-        # table section doesn't exist - look for the sizes subsection
-        sizes_pattern = r"(### sizes\n\n)(.*?)(\n## )"
-        if re.search(sizes_pattern, content, re.DOTALL):
-            new_content = re.sub(
-                sizes_pattern,
-                f"\1trying not to overbloat the skills as per [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)\n\n{table}\n\nrun `count.py` to update this table.\3",
-                content,
-                flags=re.DOTALL,
-            )
-            readme_path.write_text(new_content, encoding="utf-8")
-            return True
+    if sizes_header not in content:
+        print("error: could not find ### sizes section")
         return False
+
+    if content_after_table not in content:
+        print(
+            "error: could not find content after table (looking for 'for whats in a skill:')"
+        )
+        return False
+
+    # find positions
+    sizes_start = content.find(sizes_header)
+    content_after_start = content.find(content_after_table)
+
+    # build the new section content (from ### sizes through the table)
+    new_section = f"""### sizes
+
+trying not to overbloat the skills as per [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+
+{table}
+
+run `count.py` to update this table.
+
+"""
+
+    # reconstruct the content
+    # before: everything up to and including ### sizes header position
+    before = content[:sizes_start]
+    # after: everything from "for whats in a skill:" onwards
+    after = content[content_after_start:]
+
+    new_content = before + new_section + after
+    readme_path.write_text(new_content, encoding="utf-8")
+    return True
 
 
 def main() -> int:
@@ -108,8 +123,10 @@ def main() -> int:
     table = generate_table(results)
 
     if readme_path.exists():
-        update_readme(readme_path, table)
-        print(f"updated {readme_path}")
+        if update_readme(readme_path, table):
+            print(f"updated {readme_path}")
+        else:
+            print(f"error: failed to update {readme_path}")
     else:
         print(f"warning: {readme_path} not found, skipping update")
 
