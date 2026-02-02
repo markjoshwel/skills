@@ -148,7 +148,7 @@ def main() -> int:
             print(f"  - {r['name']}: {r['lines']} lines")
         return 0
 
-    print("\nall skills are within the 500-line optimal target ✓")
+    print("\nall skills are within the 500-line optimal target")
     return 0
 
 
