@@ -399,39 +399,11 @@ ruff check
 
 ### Meadow Docstring Format (MDF)
 
-Use MDF for all docstrings. See [references/mdf-format.md](references/mdf-format.md) for complete specification.
-
-**Quick Reference**:
-
-```python
-class Result(NamedTuple, Generic[ResultType]):
-    """
-    typing.NamedTuple representing a result for safe value retrieval
-
-    attributes:
-        `value: ResultType`
-            value to return or fallback value if erroneous
-        `error: BaseException | None = None`
-            exception if any
-
-    methods:
-        `def __bool__(self) -> bool: ...`
-            boolean comparison for truthiness-based exception safety
-        `def get(self) -> ResultType: ...`
-            method that raises or returns an error if the Result is erroneous
-
-    returns: `ResultType`
-        returns `self.value` if `self.error` is None
-
-    raises: `BaseException`
-        if `self.error` is not None
-    """
-```
+Use MDF for all docstrings. Load the `mdf-majo` skill for the complete specification.
 
 **Key Points**:
 - Use backticks with Python syntax: `` `variable: Type` ``
-- Sections: attributes/arguments, methods, returns, raises, usage
-- Optional sections marked with square brackets in spec
+- Sections: preamble, body, attributes/arguments, methods, returns, raises, usage
 - Use latest syntax even if codebase targets older Python
 
 ### When NOT to Document
@@ -838,6 +810,7 @@ This skill extends `majo-standards`. Always ensure `majo-standards` is loaded fo
 - Documentation policies
 
 Works alongside:
+- `mdf-majo` — Meadow Docstring Format specification for Python docstrings
 - `git-majo` — For committing Python code changes
 - `docs-majo` — For writing Python API documentation
 - `shell-majo` — For shell scripting within Python projects

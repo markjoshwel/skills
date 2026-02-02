@@ -320,28 +320,33 @@ full changelog: <https://github.com/user/project/compare/v1.0.0...v2.0.0>
 
 ## API reference template
 
+API references follow the Meadow Docstring Format (MDF) structure, translated to markdown.
+
 ```markdown
 ## api reference
 
 ### class project.Settings
 
-configuration container for project behaviour.
+configuration container for project behaviour
 
 - signature:
+
   ```python
-  class Settings:
-      def __init__(
-          self,
-          verbose: bool = False,
-          output_format: str = "text",
-      ) -> None: ...
+  class Settings(NamedTuple): ...
   ```
 
 - attributes:
-  - `verbose: bool` — enable detailed logging
-  - `output_format: str` — one of "text", "json", or "markdown"
+  - `verbose: bool = False`  
+    enable detailed logging
+  - `output_format: str = "text"`  
+    one of "text", "json", or "markdown"
+
+- methods:
+  - [`def validate()`](#def-projectsettingsvalidate)  
+    validates the settings and returns any errors
 
 - usage:
+
   ```python
   from project import Settings
 
@@ -350,11 +355,29 @@ configuration container for project behaviour.
 
 ---
 
-### def project.process()
+### def project.Settings.validate()
 
-main processing function.
+validates the settings and returns any configuration errors
 
 - signature:
+
+  ```python
+  def validate(self) -> list[str]: ...
+  ```
+
+- returns: `list[str]` — list of validation error messages (empty if valid)
+
+---
+
+### def project.process()
+
+main processing function
+
+processes input files or content and returns structured results. handles both
+file paths and raw string content transparently.
+
+- signature:
+
   ```python
   def process(
       input: str | Path,
@@ -363,25 +386,49 @@ main processing function.
   ```
 
 - arguments:
-  - `input: str | Path` — file path or raw content to process
-  - `settings: Settings | None` — configuration options (uses defaults if None)
+  - `input: str | Path`  
+    file path or raw content to process
+  - `settings: Settings | None = None`  
+    configuration options (uses defaults if None)
 
-- returns: `Result` — processing result with `.data` and `.metadata`
+- returns: [`project.Result`](#class-projectresult)
 
 - raises:
   - `InputError` — when input is invalid or unreadable
   - `ProcessingError` — when processing fails
 
 - usage:
+
   ```python
   from project import process, Settings
 
+  # basic usage
   result = process("input.txt")
   print(result.data)
 
   # with custom settings
   result = process("input.txt", Settings(verbose=True))
   ```
+
+---
+
+### class project.Result
+
+processing result container
+
+- signature:
+
+  ```python
+  class Result(NamedTuple): ...
+  ```
+
+- attributes:
+  - `data: str`  
+    the processed output content
+  - `metadata: dict[str, object]`  
+    additional information about the processing run
+  - `error: Exception | None = None`  
+    any error that occurred during processing
 ```
 
 ## CLI documentation template

@@ -222,29 +222,103 @@ see [references/REFERENCE.md](references/REFERENCE.md) for full template.
 
 ### API reference
 
-```markdown
-### def module.function()
+API references follow the Meadow Docstring Format (MDF) structure, translated to markdown.
+see `mdf-majo` for the full MDF specification.
 
-brief description
+**header format:**
+
+```markdown
+### <def|class> module.Name()
+```
+
+**section structure** (in order, all optional except preamble):
+
+1. **preamble** — brief one-line description (no label)
+2. **body** — longer explanation if needed (no label)
+3. **signature** — python code block with function/class signature
+4. **attributes** (for classes) or **arguments** (for functions)
+5. **methods** (for classes)
+6. **returns** — return type with optional description
+7. **raises** — exceptions that may be raised
+8. **usage** — code example
+
+**example — function:**
+
+```markdown
+### def tomlantic.ModelBoundTOML.set_field()
+
+sets a field by its location. not recommended for general use due to a lack of
+type safety, but useful when setting fields programatically
+
+will handle `pydantic.ValidationError` into more toml-friendly error messages.
+set `handle_errors` to `False` to raise the original `pydantic.ValidationError`
 
 - signature:
+
   ```python
-  def function(arg: Type) -> ReturnType: ...
+  def set_field(
+      self,
+      location: str | tuple[str, ...],
+      value: object,
+      handle_errors: bool = True,
+  ) -> None: ...
   ```
 
 - arguments:
-  - `arg: Type` — description
-
-- returns: `ReturnType` — what gets returned
+  - `location: str | tuple[str, ...]`  
+    dot-separated location of the field to set
+  - `value: object`  
+    value to set at the specified location
+  - `handle_errors: bool = True`  
+    whether to convert pydantic ValidationErrors to tomlantic errors
 
 - raises:
-  - `ExceptionType` — when condition occurs
+  - `AttributeError` — if the field does not exist
+  - [`tomlantic.TOMLValidationError`](#class-tomlantictomlvalidationerror) — if validation fails
+  - [`pydantic.ValidationError`](https://docs.pydantic.dev/) — if validation fails and `handle_errors` is `False`
+```
+
+**example — class:**
+
+```markdown
+### class tomlantic.ModelBoundTOML
+
+glue class for pydantic models and tomlkit documents
+
+- signature:
+
+  ```python
+  class ModelBoundTOML(Generic[M]): ...
+  ```
+
+- attributes:
+  - `model: pydantic.BaseModel`  
+    the bound pydantic model instance
+
+- methods:
+  - [`def model_dump_toml()`](#def-tomlanticmodelboundtomlmodel_dump_toml)  
+    dumps the model as a style-preserved tomlkit.TOMLDocument
+  - [`def get_field()`](#def-tomlanticmodelboundtomlget_field)  
+    safely retrieve a field by its location
+  - [`def set_field()`](#def-tomlanticmodelboundtomlset_field)  
+    sets a field by its location
 
 - usage:
+
   ```python
-  result = function(value)
+  toml = ModelBoundTOML(YourModel, tomlkit.parse(...))
+  toml.model.message = "hello"
+  document = toml.model_dump_toml()
   ```
 ```
+
+**formatting notes:**
+
+- use backticks around all python code: `` `Type` ``, `` `variable: Type` ``
+- link to other sections with anchors: `[`ClassName`](#class-moduleclassname)`
+- link to external docs when referencing third-party types
+- arguments/attributes use two-space linebreak before description
+- omit sections that add no value (e.g., obvious returns)
 
 ### installation section
 
@@ -394,6 +468,7 @@ so this tool... (ties back to purpose)
 
 this skill extends `majo-standards`. works alongside:
 
-- `python-majo` — for Python API documentation and MDF docstrings
+- `mdf-majo` — for Meadow Docstring Format specification (API reference structure)
+- `python-majo` — for Python code standards
 - `shell-majo` — for shell script documentation
 - `git-majo` — for commit messages that reference docs

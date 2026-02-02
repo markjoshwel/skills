@@ -1,26 +1,41 @@
+---
+name: mdf-majo
+description: Meadow Docstring Format (MDF) specification for Python documentation. Use when writing docstrings for Python code. Provides a plaintext-first, readable format that closely follows Python syntax.
+license: Unlicense
+metadata:
+  author: mark@joshwel.co
+  version: "2026.2.2"
+---
+
 # Meadow Docstring Format (MDF)
 
 A plaintext-first alternative documentation string style for Python.
 
-## Why Another Format?
+## Why MDF?
 
-It's really just for me, but I think it's an okay-ish format:
+- Easy and intuitive to read and write — it's just plaintext
+- Closely follows Python syntax, including type annotations
+- Works well across editors (best on Zed, good on VS Code)
 
-- It's easy and somewhat intuitive to read and write, especially because it's just plaintext
-- It closely follows Python syntax where it should, which includes type annotations
+## Format Overview
 
-**(bonus!)** it works:
-- Best on Zed
-- Okay-ish on Visual Studio Code
-- Eh on PyCharm
+MDF docstrings are composed of sections in a specific order:
 
-## The Format
+| Section | Required | Position | Purpose |
+|---------|----------|----------|---------|
+| preamble | Yes | Start | One-line description |
+| body | No | Start or End | Longer explanation |
+| attributes/arguments/parameters | If applicable | Middle | Incoming signatures |
+| functions/methods | If applicable | Middle | Outgoing signatures |
+| returns | If not None | Middle | Return type with description |
+| raises | If applicable | Middle | Exceptions |
+| usage | No | Start or End | Code example |
 
-The format is comprised of multiple sections:
+## Section Details
 
 ### 1. Preamble (Required)
 
-A mandatory short one-line description.
+A mandatory short one-line description:
 
 ```python
 """a baker's confectionery, usually baked, a lie"""
@@ -28,7 +43,7 @@ A mandatory short one-line description.
 
 ### 2. Body (Optional)
 
-A longer, potentially multi-line description.
+A longer, potentially multi-line description:
 
 ```python
 """a baker's confectionery, usually baked, a lie
@@ -101,7 +116,7 @@ methods:
         <description>
 ```
 
-Examples:
+Example:
 ```python
 def certain_unsafe_div(a: int | float, b: int | float) -> float:
     """divide a by b
@@ -126,7 +141,7 @@ def certain_unsafe_div(a: int | float, b: int | float) -> float:
 
 ### 6. Usage (Optional)
 
-A markdown triple backtick block with usage examples.
+A markdown triple backtick block with usage examples:
 
 ```python
 """
@@ -138,32 +153,23 @@ usage:
 """
 ```
 
-### Section Layout
+## Guidelines
 
-| Section | Required | Position |
-|---------|----------|----------|
-| 1. `preamble` | Yes | Start |
-| 2. `body` | No | Start or End |
-| 3. `accepted (incoming) signatures` | If applicable | Middle |
-| 4. `exported (outgoing) signatures` | If applicable | Middle |
-| 5. `returns` | If not None | Middle |
-| 6. `raises` | If applicable | Middle |
-| 7. `usage` | No | Start or End |
+### Use Latest Syntax
 
-## Guidelines When Writing Docstrings
+Use modern Python syntax in docstrings, even if the codebase targets older versions:
 
-### What to Care About
-
-**Use Latest Syntax**
-
-Use the latest/most succinct forms of syntax, so even if a codebase is for Python 3.9:
 ```python
+# Always use
 optional_argument: T | None = None
+
+# Not
+optional_argument: Optional[T] = None
 ```
 
-**External References**
+### External References
 
-Externally imported/third party classes should be referenced in full:
+Reference third-party classes in full for attributes, but use short names in method signatures:
 
 ```python
 class ThirdPartyExample(Exception):
@@ -179,9 +185,9 @@ class ThirdPartyExample(Exception):
     """
 ```
 
-**Overloads**
+### Overloads
 
-If having a singular docstring for overloads, use variable declaration syntaxes that make sense:
+For overloaded functions, use variable declaration syntax that makes sense:
 
 ```python
 @overload
@@ -194,61 +200,16 @@ def get_field(self, default: object = None) -> object:
     """...
 
     arguments:
-        `default: object | None = None`  # <- note: technically mismatches, but works
+        `default: object | None = None`
             ...
 
     returns: `object`
     """
-    ...
 ```
 
-### When to Not Care
+### Long Declarations
 
-**1. Classes Inherited for Namespacing**
-
-```python
-class TomlanticException(Exception):
-    """base exception class for all tomlantic errors"""
-    pass
-```
-
-**2. Return Descriptions When Painfully Obvious**
-
-```python
-def difference_between_document(
-    self, incoming_document: TOMLDocument
-) -> Difference:
-    """returns a `tomlantic.Difference` namedtuple object of the incoming and
-    outgoing fields that were changed between the model and the comparison document
-
-    arguments:
-        `incoming_document: tomlkit.TOMLDocument`
-
-    returns: `tomlantic.Difference`
-    """
-    ...
-```
-
-## Frequently Questioned Answers
-
-### Why do the `body` and `usage` sections appear multiple times?
-
-Depending on your use case, you may have a postamble after the usage, or if your body is a postamble after the torso section (and other similar use cases depending on reading flow).
-
-### What about custom text?
-
-Any other text will just be parsed as-is as body text, so there's no stopping you from adding an `example:` section (but cross-IDE compatibility is finicky, especially with PyCharm).
-
-### How does the parser detect sections?
-
-The parser will only attempt compliance when matching a line with the following pattern:
-```text
-{attributes,arguments,parameters,functions,methods,returns,raises,usage}:
-```
-
-### What if a declaration is really long?
-
-You _could_ split the declaration into multiple lines, all within the same indentation level. But unless your function takes in dozens of arguments, a single-line declaration is preferred due to much wackier differences in LSP popover rendering strategies across different mainstream editors.
+Split long declarations across multiple lines within the same indentation:
 
 ```text
 methods:
@@ -258,7 +219,35 @@ methods:
         blah blah blah blah blah blah
 ```
 
-## Examples
+## When NOT to Document
+
+### 1. Namespace Classes
+
+Simple exception hierarchies or marker classes:
+
+```python
+class TomlanticException(Exception):
+    """base exception class for all tomlantic errors"""
+    pass
+```
+
+### 2. Obvious Returns
+
+When the return is self-explanatory from the preamble:
+
+```python
+def difference_between_document(self, incoming_document: TOMLDocument) -> Difference:
+    """returns a `tomlantic.Difference` namedtuple object of the incoming and
+    outgoing fields that were changed between the model and the comparison document
+
+    arguments:
+        `incoming_document: tomlkit.TOMLDocument`
+
+    returns: `tomlantic.Difference`
+    """
+```
+
+## Complete Examples
 
 ### Class with Attributes and Methods
 
@@ -292,7 +281,7 @@ class Result(NamedTuple, Generic[ResultType]):
         """
         ...
 
-    def cry(self, string: bool = False) -> str: ...  # noqa: FBT001, FBT002
+    def cry(self, string: bool = False) -> str:
         """raises or returns an error if the Result is erroneous
 
         arguments:
@@ -384,16 +373,22 @@ class ModelBoundTOML(Generic[M]):
         ...
 ```
 
-## Format Summary
+## Quick Reference
 
-| Section | Required | Syntax |
-|---------|----------|--------|
-| preamble | Yes | Plain text |
-| body | No | Plain text |
-| attributes/arguments/parameters | If applicable | `` `name: Type` `` + description |
-| functions/methods | If applicable | `` `def name(...) -> Return` `` + description |
-| returns | If not None | `` `ReturnType` `` + description |
-| raises | If applicable | `` `ExceptionClass` `` + description |
-| usage | No | Code block with example |
+| Section | Syntax |
+|---------|--------|
+| preamble | Plain text (first line) |
+| body | Plain text |
+| attributes/arguments/parameters | `` `name: Type` `` + description |
+| functions/methods | `` `def name(...) -> Return` `` + description |
+| returns | `` `ReturnType` `` + description |
+| raises | `` `ExceptionClass` `` + description |
+| usage | Code block with example |
 
-**Always use backticks** around Python code in docstrings.
+**Key rule**: Always use backticks around Python code in docstrings.
+
+## Integration
+
+This skill is standalone but commonly used with:
+- `python-majo` — Python development standards
+- `docs-majo` — Documentation writing standards (uses MDF-based markdown for API references)
