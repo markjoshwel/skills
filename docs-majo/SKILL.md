@@ -254,120 +254,13 @@ See [references/REFERENCE.md](references/REFERENCE.md) for full template.
 
 ### API reference
 
-API references follow the Meadow Docstring Format (MDF) structure. See `mdf-majo` for full MDF spec.
+For detailed API reference documentation following MDF structure, see `mdf-md-api-docs-majo`.
 
-**header format:**
-
-```markdown
-### <def|class> module.Name()
-```
-
-**section structure** (in order, all optional except preamble):
-
-1. **preamble** — brief one-line description (no label)
-2. **body** — longer explanation if needed (no label)
-3. **signature** — python code block with function/class signature
-4. **attributes** (classes) or **arguments** (functions)
-5. **methods** (classes)
-6. **returns** — return type with optional description
-7. **raises** — exceptions that may be raised
-8. **usage** — code example
-
-**example — function:**
-
-```markdown
-### def tomlantic.ModelBoundTOML.set_field()
-
-sets a field by its location. not recommended for general use due to a lack of
-type safety, but useful when setting fields programatically
-
-will handle `pydantic.ValidationError` into more toml-friendly error messages.
-set `handle_errors` to `False` to raise the original `pydantic.ValidationError`
-
-- signature:
-
-  ```python
-  def set_field(
-      self,
-      location: str | tuple[str, ...],
-      value: object,
-      handle_errors: bool = True,
-  ) -> None: ...
-  ```
-
-- arguments:
-  - `location: str | tuple[str, ...]`  
-    dot-separated location of the field to set
-  - `value: object`  
-    value to set at the specified location
-  - `handle_errors: bool = True`  
-    whether to convert pydantic ValidationErrors to tomlantic errors
-
-- raises:
-  - `AttributeError`  
-    if the field does not exist
-  - [`tomlantic.TOMLValidationError`](#class-tomlantictomlvalidationerror)  
-    if validation fails
-  - [`pydantic.ValidationError`](https://docs.pydantic.dev/)  
-    if validation fails and `handle_errors` is `False`
-```
-
-**example — class:**
-
-```markdown
-### class tomlantic.ModelBoundTOML
-
-glue class for pydantic models and tomlkit documents
-
-- signature:
-
-  ```python
-  class ModelBoundTOML(Generic[M]): ...
-  ```
-
-- attributes:
-  - `model: pydantic.BaseModel`  
-    the bound pydantic model instance
-
-- methods:
-  - [`def model_dump_toml()`](#def-tomlanticmodelboundtomlmodel_dump_toml)  
-    dumps the model as a style-preserved tomlkit.TOMLDocument
-  - [`def get_field()`](#def-tomlanticmodelboundtomlget_field)  
-    safely retrieve a field by its location
-  - [`def set_field()`](#def-tomlanticmodelboundtomlset_field)  
-    sets a field by its location
-
-- usage:
-
-  ```python
-  toml = ModelBoundTOML(YourModel, tomlkit.parse(...))
-  toml.model.message = "hello"
-  document = toml.model_dump_toml()
-  ```
-```
-
-**formatting notes:**
-
-- Use backticks around python code: `` `Type` ``, `` `variable: Type` ``
-- Link to other sections: `[`ClassName`](#class-moduleclassname)`
-- Link to external docs for third-party types
-- Arguments/attributes/methods/raises: two-space linebreak before description
-- Single returns/raises: use `- returns:` or `- raises:` with type in backticks and two-space linebreak
-- Omit sections that add no value
-
-**single return example:**
-
-```markdown
-- returns: `ProcessedResult`  
-  structured result containing processed fields and metadata
-```
-
-**single raise example:**
-
-```markdown
-- raises: `ValueError`  
-  raised when user_id is empty or malformed
-```
+Brief overview:
+- Headers: `### def|class module.Name()`
+- Use backticks around all Python code
+- Two-space linebreak before descriptions
+- Sections: signature → arguments/attributes → methods → returns → raises → usage
 
 ### installation section
 

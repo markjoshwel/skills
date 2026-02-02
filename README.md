@@ -37,11 +37,12 @@ trying not to overbloat the skills as per [best practices](https://platform.clau
 |-------|-------|-------|--------|
 | `agents-md-authoring-majo` | 401 | 1748 | 🟢 |
 | `csharp-unity-majo` | 210 | 914 | 🟢 |
-| `docs-majo` | 518 | 1612 | 🟡 |
+| `docs-majo` | 411 | 1269 | 🟢 |
 | `git-majo` | 201 | 798 | 🟢 |
 | `js-bun-majo` | 71 | 398 | 🟢 |
 | `majo-standards` | 307 | 1354 | 🟢 |
 | `mdf-majo` | 443 | 1671 | 🟢 |
+| `mdf-md-api-docs-majo` | 270 | 891 | 🟢 |
 | `public-domain-setup-majo` | 346 | 1573 | 🟢 |
 | `python-majo` | 334 | 1267 | 🟢 |
 | `shell-majo` | 450 | 1583 | 🟢 |
