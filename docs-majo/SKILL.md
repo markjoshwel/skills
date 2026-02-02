@@ -7,339 +7,393 @@ metadata:
   version: "2026.2.2"
 ---
 
-# Documentation Writing Standards (Mark)
+# documentation writing standards
 
-Standards for writing user-facing documentation.
+standards for writing user-facing documentation. see [references/REFERENCE.md](references/REFERENCE.md)
+for full templates and examples.
 
-## Writing Style
+## voice and tone
 
-### Spelling
+### identity
 
-**Use British English spellings throughout all documentation.** See `majo-standards` for the complete list.
+- **first person, lowercase "i"**: always "i" not "I" in prose
+- **casual but technical**: friendly without sacrificing precision
+- **honest about limitations**: openly state when things are incomplete or untested
+- **personal motivation**: explain *why* something was built, not just *what*
 
-Common documentation words:
+### signature phrases
 
-- **colour** (not color)
-- **licence** (noun) / **license** (verb)
-- **behaviour** (not behavior)
-- **favourite** (not favorite)
-- **center** (technical/abstract, e.g. image center) / **centre** (a physical location, e.g. town centre)
+- **"et voilà!"** — completion/success marker after setup steps
+- **"go ham"** — permission to use freely (licence sections)
+- **emoticons**: `(●'◡'●)`, `:D`, `(❁´◡`❁)`, `:)`
+- **self-deprecating qualifiers**: "an okay interpreter", "(unserious)", "you probably shouldn't"
 
-### Tone
-
-- **Casual and conversational** — write like you're talking to a friend
-- **Use contractions**: "don't", "it's", "i've"
-- **First person**: "i", "my", "me" — this is personal documentation
-- **Enthusiasm**: use emoticons like `:D` sparingly but appropriately
-- **Self-aware**: acknowledge limitations and beta status honestly
-
-### Example
+### example
 
 ```markdown
 # tomlantic
 
-> [!WARNING]  
+> [!WARNING]
 > tomlantic is at 0.2.1 and currently, only i use it myself. it isn't battle tested,
-> so issues may arise.  
+> so issues may arise.
 > if you're willing to run into potential bugs and issues, feel free to use it!
 
 marrying [pydantic](https://github.com/pydantic/pydantic) models and
 [tomlkit](https://github.com/sdispater/tomlkit) documents for data validated,
 style-preserving toml files
 
-uses generics to automagically preserve model types, so you don't lose out on model type
-information :D
+uses generics to automagically preserve model types, so you don't lose out on model
+type information :D
 ```
 
-## Formatting
+## spelling and language
 
-### Line Length
+- **british spelling always**: licence, licenced, colour, behaviour, recognised
+- exception: PyPI READMEs may use American "License" for compatibility
+
+## formatting
+
+### line length
 
 - **100 character limit** for all documentation files
-- Exception: code blocks and URLs can exceed if necessary
+- exception: code blocks and URLs can exceed if necessary
+- documentation should be readable as plaintext in a code editor, not just preview
 
-### Headings
+### headings
 
-- Use sentence case (not Title Case)
-- Examples: `## usage`, `### installation`, `## api reference`
-- No punctuation at end of headings
+- use sentence case (not Title Case)
+- examples: `## usage`, `### installation`, `## api reference`
+- no punctuation at end of headings
 
-### Lists
-
-- Use `-` for unordered lists
-- Use `1.` for ordered lists
-- Indent with 3 or 4 spaces for nested items
-
-### Code Blocks
-
-- Use fenced code blocks with language specifiers
-- Shell commands use ` ```shell ` or ` ```text `
-- Python code uses ` ```python `
-
-### Links
-
-- Use descriptive link text, not raw URLs
-- External links to GitHub repos, documentation, etc.
-- Internal links use anchors: `[usage](#usage)`
-
-## Structure
-
-### README.md Standard Structure
-
-```markdown
-# project-name
-
-> [WARNING/NOTE blocks for important info]
-
-brief one-line description
-
-longer paragraph description if needed
-
-- [section](#section)
-  - [subsection](#subsection)
-
-## section
-
-### subsection
-
-content...
-
-## licence
-
-[licence text or reference]
-```
-
-### Table of Contents
-
-- Always include a TOC for READMEs over ~50 lines
-- Use nested bullet points for hierarchy
-- Link to section anchors
-
-### Sections (in order)
-
-1. **Title** — `# project-name`
-2. **Warning/Note blocks** — Beta status, important caveats
-3. **Description** — One line, then optional longer description
-4. **Table of Contents** — For longer docs
-5. **Usage** — Installation, quickstart, examples
-6. **API Reference** — For libraries/modules
-7. **Licence** — Full text or reference
-
-## Content Guidelines
-
-### Developer Handbooks
-
-For developer documentation (not user-facing):
-
-- Use abstract/note admonitions for environment setup information
-- Include prerequisite software lists with links
-- Provide command examples for starting development environments
-- Document workflow steps clearly with numbered lists
-- Use `!!! note` or `> **note**` for alternative methods (e.g., "alternatively, run `check.sh`")
-- Include platform-specific notes (NixOS, WSL, etc.)
-
-### Licence Pages
-
-For `licence.md` or `licenses.md`:
-
-- Group by project/component with `## [name](link)` headings
-- State the primary licence clearly in bold: **The Unlicence**
-- Include licence text using MkDocs include syntax:
-  ```markdown
-  ``` title="path/to/UNLICENCE"
-  --8<-- "path/to/UNLICENCE"
-  ```
-- List dependencies with links, descriptions, and their licences
-- Use `---` separators between different projects
-- Note when dependencies have different licences
-- Use sentence case throughout
-
-Example:
-```markdown
-# licences
-
-## [project-name](index.md)
-
-**The Unlicence**
-
-project is free and unencumbered software released into the public domain:
-
-``` title="src/project/UNLICENCE"
---8<-- "src/project/UNLICENCE"
-```
-
-however, the dependencies project relies on are licenced under different licences:
-
-- [**dependency**](https://pypi.org/project/dependency/) —
-  Brief description
-  MIT Licence
-
----
-
-## [another-project](path.md)
-
-**Mozilla Public Licence 2.0**
-```
-
-### Contributing Guidelines
-
-Structure for `contributing.md`:
-
-```markdown
-# the contributor's handbook
-
-expected details on development workflows? see [the developer's handbook](developing.md)
-
-## which forge do i use?
-
-explain options (GitHub, personal forge, email patches)
-
-## git workflow
-
-1. fork and branch from `future` or `main`
-2. make and commit changes
-3. pull upstream and resolve conflicts
-4. commit copyright waiver if needed
-5. submit pull request
-
-### waiving copyright
-
-!!! danger "Warning"
-    this section is a **must** to follow if you have modified **any** unlicenced code:
-    
-    - list of directories/files
-
-!!! info
-    the command to create an empty commit is `git commit --allow-empty`
-
-when contributing your first changes, please include an empty commit for a copyright
-waiver using the following message (replace `Your Name` with your name or username):
+### title formats
 
 ```text
-Your Name Copyright Waiver
-
-I dedicate any and all copyright interest in this software to the
-public domain...
+# surplus                              ← single lowercase word
+# surplus on wheels                    ← lowercase with spaces
+# surplus on wheels: WhatsApp Bridge   ← colon hierarchy for subprojects
+# zigby: an okay brainfuck interpreter ← name + tagline in title
 ```
 
-(from <https://unlicense.org/WAIVER>)
-```
+### lists
 
-Key elements:
-- Use `!!! danger` for critical requirements (copyright waiver)
-- Use `!!! info` for helpful tips
-- Include verbatim text blocks for legal text
-- Link to original sources (unlicense.org, creative commons, etc.)
-- Use sentence case throughout
-- Cross-reference other documentation files
+- use `-` for unordered lists
+- use `1.` for ordered lists
+- indent with 4 spaces for nested items
 
-### Installation Section
+### links
 
-- Multiple methods (PyPI, source, direct download)
-- Include shell commands
-- Note any special considerations
+- use descriptive link text, not raw URLs
+- external links to GitHub repos, documentation, etc.
+- internal links use anchors: `[usage](#usage)`
 
-### Quickstart/Examples
+## code blocks
 
-- Working code examples that can be copy-pasted
-- Comments explaining key points
-- Show realistic use cases
+### language tags
 
-### API Reference
+| tag | use for |
+| --- | --- |
+| `text` | shell commands to copy (NOT `bash`) |
+| `shell` | shell scripts with shebangs |
+| `python` | python code |
+| (none) | URLs and plain output |
 
-- Use MDF-style documentation (see `python-majo`)
-- Link to related functions/classes
-- Include signatures and return types
-- Show usage examples
-
-### Changelogs
-
-Structure:
-```markdown
-## project vX.Y.Z
-
-(released on [date] on tag `[tag-name]`)
-
-!!! information
-    tentative release notes, beta status, etc.
-
-!!! warning
-    breaking changes, api breaks, etc.
-
-### what's new
-
-- added feature X
-- added flag `--option`
-
-### what's changed
-
-- deprecated/removed features
-- renamed classes/functions
-
-### what's fixed
-
-- bug fixes
-
-### thanks!
-
-- [username](https://github.com/username) for their contribution!
-
-full changelog: <https://github.com/user/repo/compare/vOLD...vNEW>
-```
-
-Guidelines:
-- Use `!!! information` for tentative/beta releases
-- Use `!!! warning` for breaking changes
-- Use `!!! note` for versioning scheme changes or important notices
-- Include GitHub compare links at the end
-- Always thank contributors with links to their profiles
-- Use sentence case for bullet points
-- Can use `---` separators between version sections for clarity
-
-## Admonitions (Callouts)
-
-**Default: Use plaintext admonitions** (works everywhere):
+### MkDocs features
 
 ```markdown
-> **note**  
-> blah blah blah
-
-> **warning**  
-> blah blah blah
+``` title="path/to/file.py"
+code here
 ```
 
-**Important**: Include two spaces after the bold header line so the second line renders on a new line.
+--8<-- "path/to/include"
+```
 
-**Only use other styles when explicitly requested or when writing for specific platforms:**
+## structural patterns
+
+### table of contents
+
+- always include for READMEs over ~50 lines
+- use nested bullet points for hierarchy
+- question-style headers work: `[what are the features?](#what-are-the-features)`
+
+```markdown
+- [section](#section)
+  - [subsection](#subsection)
+- [what are the features?](#what-are-the-features)
+```
+
+### sections (in order)
+
+1. **title** — `# project-name`
+2. **warning/note blocks** — beta status, important caveats
+3. **description** — one line, then optional longer description
+4. **table of contents** — for longer docs
+5. **usage** — installation, quickstart, examples
+6. **api reference** — for libraries/modules
+7. **licence** — full text or reference
+
+### deprecation/archive notices
+
+use table style for visual emphasis:
+
+```markdown
+| This project has been archived. |
+| ---- |
+```
+
+### stub READMEs (monorepo subprojects)
+
+minimal pointer to main docs:
+
+```markdown
+# project name
+
+brief one-liner
+
+see <https://project.example.com>
+or [docs/index.md](../../docs/index.md)
+for more information
+```
+
+### question-based sections
+
+works well for casual/personal projects:
+
+- `## what are the features?`
+- `## cool, how do i use it?`
+- `## could it be better?`
+- `## frequently questioned answers`
+
+## admonitions (callouts)
+
+**default: use plaintext admonitions** (works everywhere):
+
+```markdown
+> **note**
+> content here (two spaces after "note" line for linebreak)
+
+> **warning**
+> content here
+```
 
 **GitHub-style** (when writing for GitHub):
+
 ```markdown
-> [!WARNING]  
+> [!WARNING]
 > This is a breaking change!
 
-> [!NOTE]  
+> [!NOTE]
 > Additional information here.
 ```
 
 **MkDocs-style** (when writing for MkDocs/Material):
+
 ```markdown
 !!! warning
     This is a breaking change!
 
-!!! note
+!!! note "Title"
     Additional information here.
 ```
 
-## Integration
+## common patterns
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
-- AGENTS.md maintenance
-- Universal code principles
-- Documentation policies
+### definition lists
 
-Works alongside:
-- `python-majo` — For Python API documentation
-- `js-bun-majo` — For JavaScript/Bun documentation
-- `shell-majo` — For shell script documentation
-- `git-majo` — For commit messages that reference docs
-- `task-planning-majo` — For planning documentation structure
+use two-space linebreak for options/variables:
+
+```markdown
+- `VARIABLE_NAME`
+  description of what it does
+
+  ```text
+  example value
+  ```
+
+  setting it to `n` will also be treated as empty.
+```
+
+### CLI documentation
+
+1. embed full `--help` output in code block
+2. group options by category (clip options, output options, etc.)
+3. separate sections for: querying, defaults, formatting, examples
+
+see [references/REFERENCE.md](references/REFERENCE.md) for full template.
+
+### API reference
+
+```markdown
+### def module.function()
+
+brief description
+
+- signature:
+  ```python
+  def function(arg: Type) -> ReturnType: ...
+  ```
+
+- arguments:
+  - `arg: Type` — description
+
+- returns: `ReturnType` — what gets returned
+
+- raises:
+  - `ExceptionType` — when condition occurs
+
+- usage:
+  ```python
+  result = function(value)
+  ```
+```
+
+### installation section
+
+show multiple methods:
+
+```markdown
+## installation
+
+install from PyPI:
+
+```text
+pip install project
+```
+
+install from source:
+
+```text
+pip install git+https://github.com/user/project.git
+```
+
+**nix users, rejoice:** `nix run github:user/project`
+```
+
+for single-file modules, mention direct inclusion as public domain.
+
+## licence documentation
+
+### standard pattern
+
+```markdown
+## licence
+
+project is free and unencumbered software released into the public domain.
+for more information, please refer to [UNLICENCE](/UNLICENCE), <https://unlicense.org>,
+or the python module docstring.
+```
+
+or the casual version:
+
+```markdown
+project is permissively "i do not care" licenced with the zero-clause bsd licence, go ham
+```
+
+### dependency licences
+
+nested list with em-dash separator:
+
+```markdown
+- [**dependency**](url) —
+  brief description
+  MIT Licence
+
+    - [**transitive-dep**](url) —
+      what it does
+      Apache 2.0
+```
+
+### dual licensing
+
+when code and assets have different licences:
+
+```markdown
+- source code:
+  The Unlicence (full text or reference)
+
+- artwork:
+  CC BY 4.0 with usage notes
+```
+
+see [references/REFERENCE.md](references/REFERENCE.md) for full licence page template.
+
+## changelog format
+
+```markdown
+## project vX.Y.Z
+
+(released on the 14th of October 2023)
+
+!!! warning
+    breaking changes here
+
+brief summary of release
+
+### what's new
+
+- added feature X
+
+### what's changed
+
+- deprecated Y
+
+### what's fixed
+
+- bug in Z
+
+### thanks!
+
+- [contributor](url) for their first contribution!
+
+full changelog: <https://github.com/user/repo/compare/vOLD...vNEW>
+
+---
+```
+
+### guidelines
+
+- use ordinal dates: "1st of July 2024", "14th of October 2023"
+- use `!!! information` for tentative/beta releases
+- use `!!! warning` for breaking changes
+- include GitHub compare links at the end
+- thank contributors with profile links
+- use `---` separators between versions
+
+see [references/REFERENCE.md](references/REFERENCE.md) for full changelog template.
+
+## special elements
+
+### personal rationale sections
+
+frequently include a "rationale" or "why" section explaining personal use case:
+
+```markdown
+## rationale
+
+i have a Mac mini that i use for... (explains personal setup)
+
+there is a good chance that... (explains logical chain)
+
+so this tool... (ties back to purpose)
+```
+
+### strikethrough for playful emphasis
+
+```markdown
+~~a good~~ an okay-ish format
+~~yell~~ gently remind
+```
+
+### backslash line continuation
+
+```markdown
+- feature description \
+  (note: this is optional but helpful)
+```
+
+## integration
+
+this skill extends `majo-standards`. works alongside:
+
+- `python-majo` — for Python API documentation and MDF docstrings
+- `shell-majo` — for shell script documentation
+- `git-majo` — for commit messages that reference docs
