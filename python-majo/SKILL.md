@@ -4,7 +4,7 @@ description: >
   Python development standards for Mark's workflow. Use when writing Python code,
   creating Python projects, adding type annotations, setting up Python tooling,
   or working with Python files. Covers UV project management, basedpyright type
-  checking, ruff formatting, Meadow Docstring Format (MDF), and Python 3.10+
+  checking, ruff formatting, meadow Docstring Format (MDF), and Python 3.10+
   syntax preferences.
 license: Unlicense OR 0BSD
 metadata:
@@ -172,7 +172,7 @@ ruff check
 
 ### Step 7: Write MDF Docstrings
 
-Use Meadow Docstring Format. See `mdf-majo` skill for full specification.
+Use meadow Docstring Format. See `mdf-majo` skill for full specification.
 
 **Key Points**:
 - Use backticks with Python syntax: `` `variable: Type` ``
@@ -320,14 +320,15 @@ For detailed examples of advanced patterns, see:
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - British English spellings
 - Universal code principles
 
 Works alongside:
-- `mdf-majo` — Meadow Docstring Format specification
+- `mdf-majo` - meadow Docstring Format (MDF) specification
+- `mdf-md-api-docs-majo` — Writing API refs or docs from code using the MDF
 - `git-majo` — For committing Python code changes
-- `docs-majo` — For writing Python API documentation
+- `writing-docs-majo` — For writing Python API documentation
 - `shell-majo` — For shell scripting within Python projects
 - `task-planning-majo` — For planning complex Python projects

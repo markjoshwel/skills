@@ -42,7 +42,7 @@ description: Python development standards for Mark's workflow. Use when writing 
 Platform-specific workarounds:
 
 ```yaml
-name: windows-majo
+name: running-windows-commands-majo
 description: Windows-specific development standards. Use when working on Windows systems to avoid Unix-isms.
 ```
 
@@ -72,7 +72,7 @@ description: Task planning workflow for complex work. Use when a task seems comp
 Project initialization:
 
 ```yaml
-name: public-domain-setup-majo
+name: setting-up-public-domain-repos-majo
 description: Set up public domain repositories with dual licensing. Use when initializing a new repository.
 ```
 

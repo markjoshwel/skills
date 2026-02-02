@@ -1,13 +1,13 @@
 ---
 name: mdf-majo
-description: Meadow Docstring Format (MDF) specification for Python documentation. Use when writing, editing, or reviewing docstrings for Python code. Provides a plaintext-first, readable format that closely follows Python syntax. Trigger when the user mentions docstrings, Python documentation, function documentation, class documentation, or writing documentation for Python code.
+description: meadow Docstring Format (MDF) specification for Python documentation. Use when writing, editing, or reviewing docstrings for Python code. Provides a plaintext-first, readable format that closely follows Python syntax. Trigger when the user mentions docstrings, Python documentation, function documentation, class documentation, or writing documentation for Python code.
 license: Unlicense
 metadata:
   author: mark@joshwel.co
   version: "2026.2.2"
 ---
 
-# Meadow Docstring Format (MDF)
+# meadow Docstring Format (MDF)
 
 ## Goal
 
@@ -24,11 +24,11 @@ Standardize Python docstring formatting to be plaintext-first, readable, and clo
 
 ## Do NOT use
 
-- For general markdown documentation (use `docs-majo` instead)
+- For general markdown documentation (use `writing-docs-majo` instead)
 - For non-Python languages
 - For external API documentation not embedded in Python code
 - When the user explicitly requests a different docstring format (Google, NumPy, Sphinx)
-- For standalone README files (use `docs-majo`)
+- For standalone README files (use `writing-docs-majo`)
 
 ## Process
 
@@ -439,4 +439,5 @@ class ModelBoundTOML(Generic[M]):
 
 This skill is standalone but commonly used with:
 - `python-majo` — Python development standards
-- `docs-majo` — Documentation writing standards (uses MDF-based markdown for API references)
+- `mdf-md-api-docs-majo` — MDF-style API reference documentation in markdown
+- `writing-docs-majo` — Documentation writing standards

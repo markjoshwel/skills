@@ -2,7 +2,7 @@
 name: mdf-md-api-docs-majo
 description: |
   MDF-style API reference documentation for markdown files.
-  Use when writing API references or documentation from code using the Meadow Docstring Format (MDF).
+  Use when writing API references or documentation from code using the meadow Docstring Format (MDF).
   Covers function and class documentation templates with proper formatting for arguments, returns, raises, methods, and usage examples.
 license: Unlicense OR 0BSD
 metadata:
@@ -12,7 +12,7 @@ metadata:
 
 # MDF API Reference Documentation
 
-API reference format following Meadow Docstring Format (MDF) structure for markdown documentation.
+API reference format following meadow Docstring Format (MDF) structure for markdown documentation.
 
 ## Goal
 
@@ -23,13 +23,13 @@ Provide clear, consistent API documentation in markdown files that mirrors Pytho
 - Writing API reference sections in README files
 - Documenting Python libraries/modules for users
 - Creating function/class documentation in markdown
-- Following up `docs-majo` when API docs are needed
+- Following up `writing-docs-majo` when API docs are needed
 
 ## Do NOT Use
 
 - Python code docstrings (use `mdf-majo` instead)
 - Internal code comments
-- Non-API documentation (use `docs-majo`)
+- Non-API documentation (use `writing-docs-majo`)
 
 ## Process
 
@@ -264,6 +264,6 @@ process a single file through the surplus pipeline
 ## Integration
 
 This skill works alongside:
-- `docs-majo` — General documentation standards
+- `writing-docs-majo` — General documentation standards
 - `mdf-majo` — Python docstring format (the inspiration for this markdown format)
 - `python-majo` — Python code standards

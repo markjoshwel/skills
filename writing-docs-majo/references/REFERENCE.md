@@ -1,4 +1,4 @@
-# docs-majo reference
+# writing-docs-majo reference
 
 detailed examples and templates for documentation patterns.
 
@@ -320,7 +320,7 @@ full changelog: <https://github.com/user/project/compare/v1.0.0...v2.0.0>
 
 ## API reference template
 
-API references follow the Meadow Docstring Format (MDF) structure, translated to markdown.
+API references follow the meadow Docstring Format (MDF) structure, translated to markdown.
 
 ```markdown
 ## api reference

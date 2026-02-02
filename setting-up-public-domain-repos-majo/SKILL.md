@@ -1,6 +1,10 @@
 ---
-name: public-domain-setup-majo
-description: Set up public domain repositories with dual licensing (Unlicense OR 0BSD).
+name: setting-up-public-domain-repos-majo
+description: |
+  Set up new repositories with dual licensing (Unlicense OR 0BSD) or convert existing repositories
+  to public domain. Use when initializing a new project, adding licensing to an unlicensed repo,
+  or switching from restrictive licenses to public domain. Fetches authoritative license files,
+  configures repository structure, and ensures consistent public domain setup.
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -45,7 +49,7 @@ metadata:
 7. **Initialize git if needed** - Run `git init` if no `.git` directory exists
 8. **Verify setup** - Check all 5 files are present with correct content
 9. **Commit license files** - Add and commit with message "Add public domain dual-licensing"
-10. **Add SPDX identifiers** - Add to source files per `majo-standards` skill
+10. **Add SPDX identifiers** - Add to source files per `dev-standards-majo` skill
 11. **Update AGENTS.md** - Document the licensing choice
 
 ## Constraints
@@ -219,7 +223,7 @@ When creating new source files, add the appropriate SPDX identifier at the top:
 # SPDX-License-Identifier: 0BSD
 ```
 
-**Note**: SPDX identifiers in source files are covered by the `majo-standards` skill. This skill focuses on repository-level setup.
+**Note**: SPDX identifiers in source files are covered by the `dev-standards-majo` skill. This skill focuses on repository-level setup.
 
 ## Complete Setup Script
 
@@ -289,7 +293,7 @@ After running this skill:
    git commit -m "Add public domain dual-licensing"
    ```
 3. **Update AGENTS.md** - Note the licensing choice
-4. **Add SPDX identifiers** to source files (see `majo-standards` skill)
+4. **Add SPDX identifiers** to source files (see `dev-standards-majo` skill)
 
 ## Testing Skills
 
@@ -321,7 +325,7 @@ sed -i '' "s/Copyright (C) [0-9]\{4\}/Copyright (C) $CURRENT_YEAR/" LICENSE-0BSD
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
@@ -330,7 +334,7 @@ Works alongside:
 - `python-majo` / `js-bun-majo` / `shell-majo` — For language-specific project setup
 - `task-planning-majo` — For complex repository setups
 - `git-majo` — For committing license files
-- `docs-majo` — For writing licence documentation
+- `writing-docs-majo` — For writing licence documentation
 
 ## References
 

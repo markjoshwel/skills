@@ -157,7 +157,7 @@ LOCATION_TIMEOUT="${LOCATION_TIMEOUT:-50}"
 
 ### Message Format
 
-Use the same format as `majo-standards` (see that skill for full details):
+Use the same format as `dev-standards-majo` (see that skill for full details):
 
 ```
 program: level: message
@@ -196,7 +196,7 @@ fi
 
 ### Exit Codes
 
-Use the grouping convention from `majo-standards`:
+Use the grouping convention from `dev-standards-majo`:
 
 | Range | Category |
 |-------|----------|
@@ -437,13 +437,13 @@ LOCATION_FALLBACK="${LOCATION_FALLBACK:-"%d%d%d\nSingapore?"}"
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
 
 Works alongside:
 - `git-majo` — For committing shell script changes
-- `docs-majo` — For writing shell script documentation
-- `windows-majo` — For shell scripting on Windows (Git Bash/WSL)
+- `writing-docs-majo` — For writing shell script documentation
+- `running-windows-commands-majo` — For shell scripting on Windows (Git Bash/WSL)
 - `task-planning-majo` — For planning complex shell workflows

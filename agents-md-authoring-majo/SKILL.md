@@ -22,7 +22,7 @@ metadata:
 
 ## When NOT to Use This Skill
 
-- **Writing end-user documentation** (use `docs-majo`)
+- **Writing end-user documentation** (use `writing-docs-majo`)
 - **Creating a new skill** (use `skill-authoring-majo`)
 - **Small project with obvious conventions** (AGENTS.md may be overkill)
 - **Documentation for non-agent consumption**
@@ -382,7 +382,7 @@ Agents use the nearest AGENTS.md (like .gitignore). Keeps context tight and rele
 
 ## Integration with Other Skills
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
@@ -391,7 +391,7 @@ Works alongside:
 - `skill-authoring-majo` — For deciding when to use AGENTS.md vs create skills
 - `task-planning-majo` — For planning AGENTS.md updates
 - `git-majo` — For committing AGENTS.md changes
-- `docs-majo` — For writing documentation about AGENTS.md
+- `writing-docs-majo` — For writing documentation about AGENTS.md
 
 ## References
 

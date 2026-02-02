@@ -1,7 +1,10 @@
 ---
-name: windows-majo
-description: Windows-specific development standards and command alternatives.
-license: Unlicense OR 0BSD
+name: running-windows-commands-majo
+description: |
+  Translate Unix commands to Windows equivalents when working on Windows systems. Use when
+  paths start with drive letters (B:\, C:\), commands fail with "not recognized" errors, or
+  when needing to avoid Unix-specific tools like tail, head, grep, or mkdir -p. Maps common
+  Unix commands to PowerShell and CMD alternatives.
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
@@ -418,7 +421,7 @@ If available, Git Bash provides Unix tools on Windows. However, prefer native Po
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
@@ -428,7 +431,7 @@ Works alongside:
 - `js-bun-majo` — For JavaScript/Bun development on Windows
 - `shell-majo` — For shell scripting on Windows (Git Bash/WSL)
 - `git-majo` — For git operations on Windows
-- `docs-majo` — For writing documentation on Windows
+- `writing-docs-majo` — For writing documentation on Windows
 
 ## Important Notes
 

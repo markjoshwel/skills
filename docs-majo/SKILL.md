@@ -1,5 +1,5 @@
 ---
-name: docs-majo
+name: writing-docs-majo
 description: |
   Documentation writing standards for Mark's projects.
   Use when writing READMEs, changelogs, API docs, or user-facing documentation.
@@ -12,14 +12,15 @@ metadata:
 
 # documentation writing standards
 
-Standards for writing user-facing documentation. See [references/REFERENCE.md](references/REFERENCE.md)
-for full templates.
+Standards for writing user-facing documentation, derived from analysis of 50+ documentation files
+across Mark's projects.
 
-## Goal
+## goal
 
-Produce documentation that is clear, consistent with Mark's personal style, and readable as plaintext.
+Produce documentation that is clear, consistent with Mark's personal style, and readable as
+plaintext in a code editor—not just in preview mode.
 
-## When to Use This Skill
+## when to use this skill
 
 - Writing or editing README files
 - Creating changelogs or release notes
@@ -27,29 +28,14 @@ Produce documentation that is clear, consistent with Mark's personal style, and 
 - Writing installation or usage instructions
 - Formatting user-facing documentation
 
-## Do NOT Use
+## do NOT use
 
 - Code comments (use `mdf-majo` or `python-majo`)
 - Git commit messages (use `git-majo`)
 - Internal technical notes or TODOs
 - Generated API docs
 
-## Process
-
-1. **Identify document type** (README, changelog, API reference)
-2. **Apply voice and tone** rules
-3. **Follow formatting constraints** (100 char limit, British English)
-4. **Structure sections** by document type
-5. **Review against this skill** before finalising
-
-## Constraints
-
-- **British spelling**: licence, colour, behaviour, recognised (PyPI READMEs may use "License")
-- **100 character limit** for prose (code blocks and URLs can exceed)
-- **Readable as plaintext** in a code editor, not just preview
-- **Sentence case for headings** (not Title Case)
-
-## Testing Skills
+## testing checklist
 
 - [ ] 100 character line length limit (except code/URLs)
 - [ ] British spelling used throughout
@@ -59,23 +45,28 @@ Produce documentation that is clear, consistent with Mark's personal style, and 
 - [ ] Voice and tone matches examples
 - [ ] Structure follows document type patterns
 
+---
+
 ## voice and tone
 
 ### identity
 
-- **first person, lowercase "i"**: "i" not "I" in prose
+- **first person, lowercase "i"**: always "i" not "I" in prose
 - **casual but technical**: friendly without sacrificing precision
-- **honest about limitations**: openly state when things are incomplete
-- **personal motivation**: explain *why*, not just *what*
+- **honest about limitations**: openly state when things are incomplete or not battle-tested
+- **personal motivation**: explain *why* something was built, not just *what*
 
 ### signature phrases
 
-- **"et voilà!"** — completion/success marker after setup
-- **"go ham"** — permission to use freely (licence sections)
-- **emoticons**: `(●'◡'●)`, `:D`, `(❁´◡`❁)`, `:)`
-- **self-deprecating qualifiers**: "an okay interpreter", "(unserious)", "you probably shouldn't"
+| phrase | usage |
+| --- | --- |
+| **"et voilà!"** | completion/success marker after setup steps |
+| **"go ham"** | permission to use freely (licence sections) |
+| **emoticons** | `(●'◡'●)`, `:D`, `(❁´◡`❁)`, `:)` |
+| **"lol"** | used naturally in technical contexts |
+| **self-deprecating qualifiers** | "an okay interpreter", "(unserious)", "you probably shouldn't" |
 
-### example
+### example voice
 
 ```markdown
 # tomlantic
@@ -93,12 +84,20 @@ uses generics to automagically preserve model types, so you don't lose out on mo
 type information :D
 ```
 
-## formatting
+---
+
+## formatting constraints
 
 ### line length
 
-- **100 character limit** for prose (code blocks and URLs can exceed)
+- **100 character limit** for prose
+- Code blocks and URLs may exceed
 - Must be readable as plaintext in a code editor
+
+### spelling
+
+- **British spelling**: licence, colour, behaviour, recognised, optimisations
+- **Exception**: PyPI READMEs may use "License" for compatibility
 
 ### headings
 
@@ -123,7 +122,7 @@ type information :D
 ### links
 
 - Use descriptive link text, not raw URLs
-- External: GitHub repos, documentation
+- External: full URLs to GitHub repos, documentation
 - Internal: `[usage](#usage)`
 
 ### code blocks
@@ -145,11 +144,13 @@ code here
 --8<-- "path/to/include"
 ```
 
+---
+
 ## structural patterns
 
 ### table of contents
 
-Include for READMEs over ~50 lines. Use nested bullets for hierarchy.
+Include for READMEs over ~50 lines. Use nested bullets for hierarchy:
 
 ```markdown
 - [section](#section)
@@ -157,7 +158,7 @@ Include for READMEs over ~50 lines. Use nested bullets for hierarchy.
 - [what are the features?](#what-are-the-features)
 ```
 
-### sections (in order)
+### section order
 
 1. **title** — `# project-name`
 2. **warning/note blocks** — beta status, important caveats
@@ -169,12 +170,16 @@ Include for READMEs over ~50 lines. Use nested bullets for hierarchy.
 
 ### deprecation/archive notices
 
+Use table-style for visual emphasis:
+
 ```markdown
 | This project has been archived. |
 | ---- |
 ```
 
 ### stub READMEs (monorepo subprojects)
+
+Minimal pattern pointing to main docs:
 
 ```markdown
 # project name
@@ -188,12 +193,16 @@ for more information
 
 ### question-based sections
 
+Playful alternative to standard headings:
+
 ```markdown
 ## what are the features?
 ## cool, how do i use it?
 ## could it be better?
 ## frequently questioned answers
 ```
+
+---
 
 ## admonitions (callouts)
 
@@ -227,6 +236,8 @@ for more information
     Additional information here.
 ```
 
+---
+
 ## common patterns
 
 ### definition lists
@@ -234,7 +245,7 @@ for more information
 Use two-space linebreak for options/variables:
 
 ```markdown
-- `VARIABLE_NAME`
+- `VARIABLE_NAME`  
   description of what it does
 
   ```text
@@ -250,19 +261,38 @@ Use two-space linebreak for options/variables:
 2. Group options by category
 3. Separate sections for: querying, defaults, formatting, examples
 
-See [references/REFERENCE.md](references/REFERENCE.md) for full template.
+### environment variable documentation
+
+Numbered list with consistent structure:
+
+```markdown
+1. `SPOW_TARGETS`  
+   a single line of comma-delimited chat IDs...
+
+   ```text
+   wa:000000000000@g.us,tg:-0000000000000,...
+   ```
+
+2. `SPOW_CRON` (optional)  
+   set as non-empty to declare...
+
+   setting it to `n` will also be treated as empty.
+```
 
 ### API reference
 
 For detailed API reference documentation following MDF structure, see `mdf-md-api-docs-majo`.
 
 Brief overview:
+
 - Headers: `### def|class module.Name()`
 - Use backticks around all Python code
 - Two-space linebreak before descriptions
 - Sections: signature → arguments/attributes → methods → returns → raises → usage
 
 ### installation section
+
+Show multiple methods:
 
 ```markdown
 ## installation
@@ -284,6 +314,8 @@ pip install git+https://github.com/user/project.git
 
 For single-file modules, mention direct inclusion as public domain.
 
+---
+
 ## licence documentation
 
 ### standard pattern
@@ -296,13 +328,15 @@ for more information, please refer to [UNLICENCE](/UNLICENCE), <https://unlicens
 or the python module docstring.
 ```
 
-Casual version:
+### casual version
 
 ```markdown
 project is permissively "i do not care" licenced with the zero-clause bsd licence, go ham
 ```
 
 ### dependency licences
+
+Nested list with em-dash separator:
 
 ```markdown
 - [**dependency**](url) —
@@ -324,9 +358,11 @@ project is permissively "i do not care" licenced with the zero-clause bsd licenc
   CC BY 4.0 with usage notes
 ```
 
-See [references/REFERENCE.md](references/REFERENCE.md) for full licence page template.
+---
 
 ## changelog format
+
+### entry structure
 
 ```markdown
 ## project vX.Y.Z
@@ -368,13 +404,19 @@ full changelog: <https://github.com/user/repo/compare/vOLD...vNEW>
 - Thank contributors with profile links
 - Use `---` separators between versions
 
-See [references/REFERENCE.md](references/REFERENCE.md) for full changelog template.
+### version header formats
+
+- Semantic: `## 2.7.0` (no "v" prefix)
+- With prefix: `## surplus v2.2.0`
+- Calendar-based: `## v2024.0.0`, `## v2.2024.25`
+
+---
 
 ## special elements
 
 ### personal rationale sections
 
-Explain personal use case:
+Explain personal use case with narrative:
 
 ```markdown
 ## rationale
@@ -388,6 +430,8 @@ so this tool... (ties back to purpose)
 
 ### strikethrough for playful emphasis
 
+Not corrections, but emphasis:
+
 ```markdown
 ~~a good~~ an okay-ish format
 ~~yell~~ gently remind
@@ -400,11 +444,46 @@ so this tool... (ties back to purpose)
   (note: this is optional but helpful)
 ```
 
+### nix user callout
+
+Bold callout with alternatives:
+
+```markdown
+**nix users, rejoice:** `nix run github:user/project` or
+`git+https://forge.joshwel.co/mark/project.git`
+```
+
+---
+
+## platform-specific conventions
+
+### GitHub
+
+- Alerts: `> [!NOTE]`, `> [!WARNING]`, `> [!IMPORTANT]`, `> [!TIP]`
+- Issue references: `[#34](url)`, `(python/cpython#88089)`
+- Video embeds: direct GitHub asset URLs
+
+### MkDocs
+
+- Admonitions: `!!! warning`, `!!! note "Title"`
+- File inclusion: `--8<-- "path/to/file"`
+- Code block titles: ``` title="path/to/file.py"
+
+### PyPI READMEs
+
+- Use absolute GitHub URLs (not relative)
+- May use American "License" spelling
+- Condensed compared to main README
+- Point back to main repo for full docs
+
+---
+
 ## integration
 
-This skill extends `majo-standards`. Works alongside:
+This skill extends `dev-standards-majo`. Works alongside:
 
 - `mdf-majo` — Meadow Docstring Format specification
+- `mdf-md-api-docs-majo` — MDF-style API reference documentation in markdown
 - `python-majo` — Python code standards
 - `shell-majo` — Shell script documentation
 - `git-majo` — Commit messages that reference docs

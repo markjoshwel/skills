@@ -252,7 +252,7 @@ No → Execute directly
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance policies
 - Universal code principles
 
@@ -261,4 +261,4 @@ Works alongside:
 - `js-bun-majo` — For JavaScript/Bun-specific planning considerations
 - `shell-majo` — For shell script planning considerations
 - `git-majo` — For planning git workflows and commits
-- `docs-majo` — For planning documentation structure
+- `writing-docs-majo` — For planning documentation structure

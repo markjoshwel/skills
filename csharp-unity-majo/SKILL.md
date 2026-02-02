@@ -173,7 +173,7 @@ Debug.LogError($"authservice: error: failed to sign in: {e.Message}");
 
 ## British Spellings
 
-Use British spellings in code identifiers and documentation. See `majo-standards` for the complete list.
+Use British spellings in code identifiers and documentation. See `dev-standards-majo` for the complete list.
 
 Common C# examples:
 - `Initialise()` not `Initialize()`
@@ -197,7 +197,7 @@ Common C# examples:
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - British English spellings
 - Error message format
 - AGENTS.md maintenance
@@ -205,5 +205,5 @@ This skill extends `majo-standards`. Always ensure `majo-standards` is loaded fo
 
 Works alongside:
 - `git-majo` — For committing C# changes
-- `docs-majo` — For writing C#/Unity documentation
+- `writing-docs-majo` — For writing C#/Unity documentation
 - `task-planning-majo` — For planning Unity projects

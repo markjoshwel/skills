@@ -186,7 +186,7 @@ After creating or updating this skill:
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
@@ -195,6 +195,6 @@ Works alongside:
 - `python-majo` — For Python-specific development and commits
 - `js-bun-majo` — For JavaScript/Bun development and commits
 - `shell-majo` — For shell scripting and commits
-- `docs-majo` — For documentation commits
+- `writing-docs-majo` — For documentation commits
 - `task-planning-majo` — For complex multi-step work
-- `windows-majo` — For git operations on Windows
+- `running-windows-commands-majo` — For git operations on Windows

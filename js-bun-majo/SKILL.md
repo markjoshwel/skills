@@ -60,11 +60,11 @@ If uncertain on how to invoke Bun commands, use the command line for help.
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
 
 Works alongside:
 - `git-majo` — For committing JavaScript/TypeScript changes
-- `docs-majo` — For writing JavaScript/TypeScript documentation
+- `writing-docs-majo` — For writing JavaScript/TypeScript documentation

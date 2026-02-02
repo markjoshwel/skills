@@ -62,7 +62,7 @@ Follow the naming convention: `{topic}-majo`
 Examples:
 - `python-majo` — Python development standards
 - `task-planning-majo` — Task planning workflows
-- `public-domain-setup-majo` — Repository setup
+- `setting-up-public-domain-repos-majo` — Repository setup
 
 ### Step 3: Draft the SKILL.md
 
@@ -227,7 +227,7 @@ metadata:                            # Optional but recommended
 
 This skill works alongside:
 - `other-skill` — For <purpose>
-- `majo-standards` — For SPDX identifiers and universal principles
+- `dev-standards-majo` — For SPDX identifiers and universal principles
 ```
 
 ### Naming Conventions
@@ -237,7 +237,7 @@ This skill works alongside:
 **Examples**:
 - `python-majo` - Python development
 - `task-planning-majo` - Planning workflows
-- `windows-majo` - Windows-specific commands
+- `running-windows-commands-majo` - Windows-specific commands
 
 **Good names**:
 - Short and descriptive
@@ -314,7 +314,7 @@ References and assets:
 - **Avoid mega-skills** — Prefer focused, composable skills
 - **Never exceed 5000 tokens** — Move large content to references/
 - **Use kebab-case naming** — Directory name must match `name` field
-- **Include SPDX identifiers** — Per `majo-standards`
+- **Include SPDX identifiers** — Per `dev-standards-majo`
 - **Write actionable instructions** — Tell HOW, not WHAT
 - **Test implicit invocation** — Before shipping
 - **Version significant changes** — Update metadata version
@@ -337,9 +337,9 @@ Five common skill patterns for inspiration:
 
 1. **Tool Wrapper** - Wraps a CLI tool with usage guidance (e.g., `sheets-cli-majo`)
 2. **Language Standards** - Coding standards for a specific language (e.g., `python-majo`)
-3. **Platform-Specific** - Platform-specific workarounds (e.g., `windows-majo`)
+3. **Platform-Specific** - Platform-specific workarounds (e.g., `running-windows-commands-majo`)
 4. **Workflow/Process** - Repeatable workflows (e.g., `task-planning-majo`)
-5. **Setup/Configuration** - Project initialization (e.g., `public-domain-setup-majo`)
+5. **Setup/Configuration** - Project initialization (e.g., `setting-up-public-domain-repos-majo`)
 
 For detailed examples and patterns, see [references/DETAILED_EXAMPLES.md](references/DETAILED_EXAMPLES.md).
 
@@ -389,7 +389,7 @@ If skill B extends skill A, mention it:
 ```markdown
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded.
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded.
 ```
 
 ### Skill Conflicts
@@ -424,12 +424,12 @@ Do not use alongside `other-skill` - they provide conflicting guidance.
 
 ## Integration
 
-This skill extends `majo-standards`. Always ensure `majo-standards` is loaded for:
+This skill extends `dev-standards-majo`. Always ensure `dev-standards-majo` is loaded for:
 - AGENTS.md maintenance
 - Universal code principles
 - Documentation policies
 
 Works alongside:
-- `docs-majo` — For writing skill documentation
+- `writing-docs-majo` — For writing skill documentation
 - `git-majo` — For committing new skills
 - `task-planning-majo` — For planning complex skill creation

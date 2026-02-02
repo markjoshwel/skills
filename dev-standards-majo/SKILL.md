@@ -1,10 +1,10 @@
 ---
-name: majo-standards
-description: >
-  Mark's core development standards and conventions. Use for any code generation to ensure
-  consistency with maintainable, readable code that follows established patterns. Covers
-  universal principles like code style, documentation policies, error handling, exit codes,
-  British English spellings, and AGENTS.md maintenance.
+name: dev-standards-majo
+description: |
+  Apply Mark's core development standards to ensure consistent, maintainable code across all
+  projects. Use when starting work on any codebase, generating new code, refactoring, or when
+  unsure about documentation requirements, error handling, British English spellings, or
+  AGENTS.md maintenance. Covers universal principles that apply before language-specific skills.
 license: Unlicense
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -294,13 +294,14 @@ This skill works alongside language-specific skills:
 - `js-bun-majo` - JavaScript/TypeScript/Bun standards
 - `shell-majo` - POSIX shell scripting standards
 - `git-majo` - Git workflow and commit standards
-- `docs-majo` - Documentation writing standards
+- `writing-docs-majo` - Documentation writing standards
 - `task-planning-majo` - Planning workflows
-- `public-domain-setup-majo` - Public domain repository setup
-- `windows-majo` - Windows-specific command alternatives
+- `setting-up-public-domain-repos-majo` - Public domain repository setup
+- `running-windows-commands-majo` - Windows-specific command alternatives
 - `skill-authoring-majo` - Creating new Agent Skills
 - `agents-md-authoring-majo` - Writing effective AGENTS.md files
 - `csharp-unity-majo` - C#/Unity development standards
-- `mdf-majo` - Meadow Docstring Format for Python
+- `mdf-majo` - meadow Docstring Format (MDF) for Python
+- `mdf-md-api-docs-majo` — Writing API refs or docs from code using the MDF
 
 **Always load this skill first**, then the appropriate language-specific skill.
