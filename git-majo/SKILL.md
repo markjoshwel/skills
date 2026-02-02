@@ -45,7 +45,7 @@ Enable consistent, traceable git history that tracks LLM prompt count per featur
 - **ALWAYS commit after every prompt** (unless user says "do not commit")
 - **One commit per prompt** (unless prompt asks for multiple)
 - **NEVER auto-push** - wait for explicit push instruction
-- **Include original prompt** in commit description (shortened if lengthy)
+- **Include simplified prompts leading up to the commit** in the commit description (shortened if lengthy)
 - **Match existing style** from repository history
 
 ## Auto-Commit Policy
@@ -107,16 +107,16 @@ git commit -m "docs(readme): update installation steps"
 git commit -m "refactor(utils): extract helper functions"
 ```
 
-## Including Original Prompt
+## Including Prompts Leading Up to the Commit
 
-**Commit description should include the original prompt** (shortened/redacted if lengthy):
+**Commit description should include the simplified prompts leading up to the commit** (shortened/redacted if lengthy):
 
 ```bash
 # For short prompts
-git commit -m "feat(api): add user authentication endpoint" -m "Prompt: add login with jwt tokens"
+git commit -m "feat(api): add user authentication endpoint" -m "Prompts: add login with jwt tokens; wire refresh token flow"
 
 # For longer prompts (redact verbose parts)
-git commit -m "fix(parser): handle edge case in csv parsing" -m "Prompt: fix the issue where empty lines cause crash [diagnostic output redacted]"
+git commit -m "fix(parser): handle edge case in csv parsing" -m "Prompts: fix issue where empty lines cause crash [diagnostic output redacted]; add regression test"
 ```
 
 **Redaction guidelines**:
