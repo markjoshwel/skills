@@ -304,9 +304,12 @@ set `handle_errors` to `False` to raise the original `pydantic.ValidationError`
     whether to convert pydantic ValidationErrors to tomlantic errors
 
 - raises:
-  - `AttributeError` — if the field does not exist
-  - [`tomlantic.TOMLValidationError`](#class-tomlantictomlvalidationerror) — if validation fails
-  - [`pydantic.ValidationError`](https://docs.pydantic.dev/) — if validation fails and `handle_errors` is `False`
+  - `AttributeError`  
+    if the field does not exist
+  - [`tomlantic.TOMLValidationError`](#class-tomlantictomlvalidationerror)  
+    if validation fails
+  - [`pydantic.ValidationError`](https://docs.pydantic.dev/)  
+    if validation fails and `handle_errors` is `False`
 ```
 
 **example — class:**
@@ -348,8 +351,23 @@ glue class for pydantic models and tomlkit documents
 - Use backticks around python code: `` `Type` ``, `` `variable: Type` ``
 - Link to other sections: `[`ClassName`](#class-moduleclassname)`
 - Link to external docs for third-party types
-- Arguments/attributes: two-space linebreak before description
+- Arguments/attributes/methods/raises: two-space linebreak before description
+- Single returns/raises: use `- returns:` or `- raises:` with type in backticks and two-space linebreak
 - Omit sections that add no value
+
+**single return example:**
+
+```markdown
+- returns: `ProcessedResult`  
+  structured result containing processed fields and metadata
+```
+
+**single raise example:**
+
+```markdown
+- raises: `ValueError`  
+  raised when user_id is empty or malformed
+```
 
 ### installation section
 
