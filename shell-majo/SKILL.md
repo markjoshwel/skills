@@ -1,6 +1,16 @@
 ---
 name: shell-majo
-description: POSIX shell scripting standards for Mark's workflow. Use when writing shell scripts. Covers pure POSIX sh (not bash), license headers, variable naming, error handling, and defensive programming patterns.
+description: POSIX shell scripting standards for Mark's workflow.
+triggers:
+  - "writing shell script"
+  - "shell scripting"
+  - "bash script"
+  - "POSIX sh"
+  - ".sh file"
+  - "#!/bin/sh"
+  - "#!/bin/bash"
+  - "shell command"
+tags: [shell, scripting, posix, bash]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -8,6 +18,46 @@ metadata:
 ---
 
 # POSIX Shell Scripting Standards (Mark)
+
+**Goal**: Write portable, defensive shell scripts using pure POSIX sh (not bash) unless a specific Bash feature is strictly required.
+
+## When to Use This Skill
+
+- **Writing new shell scripts** (`.sh` files)
+- **Modifying existing shell scripts**
+- **Choosing between POSIX sh and Bash**
+- **Adding error handling to scripts**
+- **Creating command-line tools**
+- **Writing automation scripts**
+
+## When NOT to Use This Skill
+
+- **Script requires Bash-specific features** (arrays, process substitution, extglob)
+- **Target environment guarantees Bash availability** AND requires Bash features
+- **Complex data structures needed** that can't be flattened to strings
+- **Writing Python/JS scripts instead** (prefer those for complex logic)
+
+## Process
+
+1. **Check script requirements** - Determine if POSIX sh is sufficient or Bash is truly needed
+2. **Set shebang** - Use `#!/bin/sh` for POSIX, `#!/bin/bash` only if enumerated exception applies
+3. **Add license header** - Include full Unlicense header (see File Header section)
+4. **Enable error handling** - Add `set -e` at the top
+5. **Define exit codes** - Document exit code ranges in comments
+6. **Use proper naming** - UPPER_CASE for env vars/constants, lower_case for local vars
+7. **Quote all variables** - Prevent word splitting: `"$var"` not `$var`
+8. **Use printf not echo** - For portable output
+9. **Test with shellcheck** - Run `shellcheck script.sh`
+10. **Update AGENTS.md** - Document any project-specific shell patterns
+
+## Constraints
+
+- **ALWAYS default to POSIX sh** for all scripts
+- **ONLY use Bash if you can explicitly enumerate** which Bash-specific feature is strictly required and impossible in POSIX sh
+- **Valid Bash exceptions**: arrays (indexed/associative), extglob patterns, process substitution, controlled Bash environments
+- **"Cleaner" or "fewer lines" is NOT sufficient justification** for Bash
+- **Scripts must be compatible with `/bin/sh`** on any POSIX-compliant system
+- **Use `#!/bin/sh`** - Never use `#!/bin/bash` or `#!/usr/bin/env bash` without enumerated exception
 
 Shell scripting standards following pure POSIX sh (not bash).
 
@@ -386,6 +436,14 @@ shellcheck script.sh
 # shellcheck disable=SC2059
 LOCATION_FALLBACK="${LOCATION_FALLBACK:-"%d%d%d\nSingapore?"}"
 ```
+
+## Testing Skills
+
+- Run `shellcheck script.sh` - Should produce no warnings/errors
+- Test on multiple shells: `dash script.sh`, `bash script.sh`, `sh script.sh`
+- Check exit codes: Run with invalid args, missing files, verify proper codes
+- Test variable quoting: Use paths with spaces to verify no word splitting
+- Verify portability: Avoid `[[`, `source`, `let`, arrays unless in Bash exception
 
 ## Integration
 

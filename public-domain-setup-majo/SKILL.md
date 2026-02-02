@@ -1,6 +1,17 @@
 ---
 name: public-domain-setup-majo
-description: Set up public domain repositories with dual licensing (Unlicense OR 0BSD). Use when initializing a new repository or converting an existing one to public domain. Fetches authoritative license files and configures the repository according to Mark's standards.
+description: Set up public domain repositories with dual licensing (Unlicense OR 0BSD).
+triggers:
+  - "public domain"
+  - "repository setup"
+  - "dual licensing"
+  - "Unlicense"
+  - "0BSD"
+  - "new repository"
+  - "init repository"
+  - "license setup"
+  - "SPDX license"
+tags: [licensing, public-domain, repository, unlicense, 0bsd]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -11,6 +22,53 @@ metadata:
 
 # Public Domain Repository Setup (Mark)
 
+**Goal**: Set up free-as-in-freedom repositories with dual licensing under The Unlicense OR BSD Zero Clause License (0BSD), ensuring maximum freedom for users while providing legal clarity.
+
+## When to Use This Skill
+
+- **Initializing a new repository** - Setting up licensing from the start
+- **Converting an existing repository to public domain** - Changing from restrictive licenses
+- **Setting up licensing for a new project** - Ensuring consistent public domain structure
+- **Ensuring consistent public domain structure** - Across multiple projects
+- **Adding public domain dedication** - To personal or open-source projects
+
+## When NOT to Use This Skill
+
+- **Repository has existing licenses that cannot be changed** (corporate policy)
+- **Project requires copyleft licenses** (GPL, AGPL, etc.)
+- **Project requires attribution licenses** (MIT, Apache, BSD-2/3-Clause)
+- **Contributor cannot waive copyright** (employer restrictions, some jurisdictions)
+- **Need to preserve existing license obligations** (fork of licensed project)
+
+## Process
+
+1. **Check repository state** - Determine if new or existing repository
+2. **Check for existing license files** (CRITICAL) - Look for LICENSE, COPYING, or similar files
+3. **If existing licenses found, STOP and ask user** - Get explicit guidance before proceeding
+4. **Fetch authoritative files** - Download from gist repository:
+   - CODE_OF_CONDUCT.md
+   - CONTRIBUTING
+   - LICENCING (British spelling)
+   - LICENSE-0BSD
+   - UNLICENSE
+5. **Update copyright year** - Set to current year in LICENSE-0BSD (CRITICAL)
+6. **Place files in repository root** - Copy all fetched files to project root
+7. **Initialize git if needed** - Run `git init` if no `.git` directory exists
+8. **Verify setup** - Check all 5 files are present with correct content
+9. **Commit license files** - Add and commit with message "Add public domain dual-licensing"
+10. **Add SPDX identifiers** - Add to source files per `majo-standards` skill
+11. **Update AGENTS.md** - Document the licensing choice
+
+## Constraints
+
+- **ALWAYS check for existing LICENSE/COPYING files first** - Do not overwrite without user guidance
+- **ALWAYS update copyright year** to current year in LICENSE-0BSD - Never use outdated year
+- **ALWAYS use dual-license format** `Unlicense OR 0BSD` in SPDX identifiers
+- **NEVER proceed with setup if existing licenses clash** - Stop and ask user for direction
+- **Use British spelling "LICENCING"** (with 'c') - But LICENSE-0BSD and UNLICENSE use American spelling (with 's') for standards compatibility
+- **Fetch from authoritative gist sources** - Don't create files from scratch
+- **Default to Mark Joshwel <mark@joshwel.co>** - Unless user specifies otherwise
+
 Automated setup for public domain repositories with dual licensing (Unlicense OR 0BSD).
 
 ## Overview
@@ -18,13 +76,6 @@ Automated setup for public domain repositories with dual licensing (Unlicense OR
 This skill sets up repositories to be free-as-in-freedom, dual-licensed under The Unlicense or the BSD Zero Clause License (SPDX: `Unlicense OR 0BSD`).
 
 **The Spirit**: Treat the work as public domain via The Unlicense, but provide the BSD Zero Clause License where public domain dedication is not possible due to policies bound to a contributor or their employer.
-
-## When to Use This Skill
-
-- Initializing a new repository
-- Converting an existing repository to public domain
-- Setting up licensing for a new project
-- Ensuring consistent public domain structure
 
 ## Prerequisites
 
@@ -250,6 +301,16 @@ After running this skill:
    ```
 3. **Update AGENTS.md** - Note the licensing choice
 4. **Add SPDX identifiers** to source files (see `majo-standards` skill)
+
+## Testing Skills
+
+- **Existing license check**: Verify no LICENSE/COPYING files exist before proceeding
+- **File presence test**: All 5 files present (CODE_OF_CONDUCT.md, CONTRIBUTING, LICENCING, LICENSE-0BSD, UNLICENSE)
+- **Copyright year verification**: Check current year is in LICENSE-0BSD line 1
+- **Fetch validation**: All files downloaded correctly from gist URLs
+- **Git initialization**: `.git` directory exists after setup
+- **SPDX format check**: Dual-license format "Unlicense OR 0BSD" in identifiers
+- **British spelling**: LICENCING spelled with 'c' (British), LICENSE-0BSD with 's' (American)
 
 ## Common Issues
 

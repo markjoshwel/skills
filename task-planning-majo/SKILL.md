@@ -1,6 +1,12 @@
 ---
 name: task-planning-majo
-description: Task planning workflow for complex work. Use when a task seems complex enough to require planning. Gather context, draft a plan in markdown, ask up to 3 follow-up questions, and track progress in AGENTS.md or AGENTS.PLAN.md.
+description: |
+  Task planning workflow for complex work. Load this skill when the user says 
+  things like "this is complex", "I need a plan", "break this down", or when 
+  a task involves multiple files, unclear requirements, or significant architecture 
+  decisions. Triggers include multi-step implementations, refactoring across 
+  codebase, feature design, or when the approach is ambiguous.
+tags: [planning, workflow, complex-tasks, project-management]
 license: Unlicense
 metadata:
   author: mark@joshwel.co
@@ -11,18 +17,42 @@ metadata:
 
 Planning protocol for complex tasks requiring structured execution.
 
-## When to Plan
+## Goal
 
-**Plan when**:
+Enable effective execution of complex tasks by creating clear, actionable plans 
+that align with user expectations and project standards. Reduce ambiguity, 
+prevent rework, and ensure comprehensive coverage of all requirements before 
+implementation begins.
+
+## When to Use This Skill
+
+**Use when**:
 - The task seems complex enough to require multiple steps
 - You're unsure about the approach or requirements
 - The task involves significant changes across multiple files
 - User explicitly asks for a plan
+- The user says things like "break this down", "how should I approach this?", or "this is complicated"
+- You need to make architectural decisions that affect multiple components
+- The task spans more than 3-4 files or requires significant refactoring
 
-**Don't plan when**:
-- The task is straightforward (single file, obvious fix)
-- User gives explicit step-by-step instructions
-- It's a continuation of already-planned work
+## Do NOT use
+
+- For straightforward tasks (single file, obvious fix, < 30 minutes of work)
+- When user gives explicit step-by-step instructions
+- For continuations of already-planned work (follow existing plan instead)
+- For trivial edits like fixing typos or updating a single configuration value
+- When the task scope is explicitly limited and clear
+
+## Constraints
+
+**Hard guardrails you must follow**:
+- **Maximum 3 rounds** of follow-up questions - never exceed this limit
+- **Always use AGENTS.md** for plan tracking when it exists; create AGENTS.PLAN.md only if AGENTS.md is absent
+- **Don't over-research** - gather just enough context to reason about the task (5-10 minutes max), then plan
+- **Plans must be actionable** - every task item must be specific and verifiable
+- **Update plans in real-time** - mark items complete as you finish them, don't batch updates
+- **Questions must be specific** - never ask "what should I do?" - instead ask "should I use approach A or B?"
+- **Respect project standards** - always check AGENTS.md for project-specific planning preferences first
 
 ## Planning Workflow
 
@@ -126,6 +156,24 @@ As you work:
 3. **Update status**: Change status if blocked or completed
 4. **Record decisions**: Note any important decisions made
 
+## Testing Skills
+
+Before executing a plan, always verify testing approach:
+
+1. **Check AGENTS.md** for project-specific testing commands and requirements
+2. **Identify test framework** used in the project (pytest, vitest, jest, etc.)
+3. **Plan tests for new code** - include test tasks in your plan
+4. **Verify after completion** - run the appropriate test command before marking complete
+
+**Example test planning**:
+```markdown
+### Phase 3: Testing
+- [ ] Write unit tests for new authentication middleware
+- [ ] Add integration tests for login/register endpoints
+- [ ] Run `pytest tests/auth/` and ensure all pass
+- [ ] Check code coverage meets project minimum (if specified)
+```
+
 ## Example Workflow
 
 ### Scenario: Adding a New Feature
@@ -192,6 +240,8 @@ No → Execute directly
 - ✅ Update AGENTS.md as you progress
 - ✅ Mark completed items promptly
 - ✅ Record decisions and their rationale
+- ✅ Include testing phases in your plans
+- ✅ Reference specific files/lines when asking questions
 
 ### Don't
 - ❌ Over-plan simple tasks
@@ -199,6 +249,7 @@ No → Execute directly
 - ❌ Let plans go stale (update as you work)
 - ❌ Skip tracking in AGENTS.md
 - ❌ Ask vague questions like "What should I do?"
+- ❌ Forget to verify tests pass before completing
 
 ## Integration
 

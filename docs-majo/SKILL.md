@@ -1,6 +1,10 @@
 ---
 name: docs-majo
-description: Documentation writing standards for Mark's projects. Use when writing README files, changelogs, API documentation, and other user-facing docs. Covers writing style, formatting, structure, and tone.
+description: |
+  Documentation writing standards for Mark's projects.
+  Use when writing READMEs, changelogs, API docs, or user-facing documentation.
+  Covers writing style, formatting, structure, and tone.
+tags: [documentation, writing, readme, markdown, style]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -9,21 +13,65 @@ metadata:
 
 # documentation writing standards
 
-standards for writing user-facing documentation. see [references/REFERENCE.md](references/REFERENCE.md)
-for full templates and examples.
+Standards for writing user-facing documentation. See [references/REFERENCE.md](references/REFERENCE.md)
+for full templates.
+
+## Goal
+
+Produce documentation that is clear, consistent with Mark's personal style, and readable as plaintext.
+
+## When to Use This Skill
+
+- Writing or editing README files
+- Creating changelogs or release notes
+- Drafting API documentation
+- Writing installation or usage instructions
+- Formatting user-facing documentation
+
+## Do NOT Use
+
+- Code comments (use `mdf-majo` or `python-majo`)
+- Git commit messages (use `git-majo`)
+- Internal technical notes or TODOs
+- Generated API docs
+
+## Process
+
+1. **Identify document type** (README, changelog, API reference)
+2. **Apply voice and tone** rules
+3. **Follow formatting constraints** (100 char limit, British English)
+4. **Structure sections** by document type
+5. **Review against this skill** before finalising
+
+## Constraints
+
+- **British spelling**: licence, colour, behaviour, recognised (PyPI READMEs may use "License")
+- **100 character limit** for prose (code blocks and URLs can exceed)
+- **Readable as plaintext** in a code editor, not just preview
+- **Sentence case for headings** (not Title Case)
+
+## Testing Skills
+
+- [ ] 100 character line length limit (except code/URLs)
+- [ ] British spelling used throughout
+- [ ] First person with lowercase "i"
+- [ ] Sentence case headings
+- [ ] Proper code block language tags
+- [ ] Voice and tone matches examples
+- [ ] Structure follows document type patterns
 
 ## voice and tone
 
 ### identity
 
-- **first person, lowercase "i"**: always "i" not "I" in prose
+- **first person, lowercase "i"**: "i" not "I" in prose
 - **casual but technical**: friendly without sacrificing precision
-- **honest about limitations**: openly state when things are incomplete or untested
-- **personal motivation**: explain *why* something was built, not just *what*
+- **honest about limitations**: openly state when things are incomplete
+- **personal motivation**: explain *why*, not just *what*
 
 ### signature phrases
 
-- **"et voilà!"** — completion/success marker after setup steps
+- **"et voilà!"** — completion/success marker after setup
 - **"go ham"** — permission to use freely (licence sections)
 - **emoticons**: `(●'◡'●)`, `:D`, `(❁´◡`❁)`, `:)`
 - **self-deprecating qualifiers**: "an okay interpreter", "(unserious)", "you probably shouldn't"
@@ -46,24 +94,17 @@ uses generics to automagically preserve model types, so you don't lose out on mo
 type information :D
 ```
 
-## spelling and language
-
-- **british spelling always**: licence, licenced, colour, behaviour, recognised
-- exception: PyPI READMEs may use American "License" for compatibility
-
 ## formatting
 
 ### line length
 
-- **100 character limit** for all documentation files
-- exception: code blocks and URLs can exceed if necessary
-- documentation should be readable as plaintext in a code editor, not just preview
+- **100 character limit** for prose (code blocks and URLs can exceed)
+- Must be readable as plaintext in a code editor
 
 ### headings
 
-- use sentence case (not Title Case)
-- examples: `## usage`, `### installation`, `## api reference`
-- no punctuation at end of headings
+- **sentence case** (not Title Case): `## usage`, `### installation`
+- No punctuation at end
 
 ### title formats
 
@@ -76,19 +117,17 @@ type information :D
 
 ### lists
 
-- use `-` for unordered lists
-- use `1.` for ordered lists
-- indent with 4 spaces for nested items
+- `-` for unordered lists
+- `1.` for ordered lists
+- 4 spaces for nested items
 
 ### links
 
-- use descriptive link text, not raw URLs
-- external links to GitHub repos, documentation, etc.
-- internal links use anchors: `[usage](#usage)`
+- Use descriptive link text, not raw URLs
+- External: GitHub repos, documentation
+- Internal: `[usage](#usage)`
 
-## code blocks
-
-### language tags
+### code blocks
 
 | tag | use for |
 | --- | --- |
@@ -97,7 +136,7 @@ type information :D
 | `python` | python code |
 | (none) | URLs and plain output |
 
-### MkDocs features
+**MkDocs features:**
 
 ```markdown
 ``` title="path/to/file.py"
@@ -111,9 +150,7 @@ code here
 
 ### table of contents
 
-- always include for READMEs over ~50 lines
-- use nested bullet points for hierarchy
-- question-style headers work: `[what are the features?](#what-are-the-features)`
+Include for READMEs over ~50 lines. Use nested bullets for hierarchy.
 
 ```markdown
 - [section](#section)
@@ -133,16 +170,12 @@ code here
 
 ### deprecation/archive notices
 
-use table style for visual emphasis:
-
 ```markdown
 | This project has been archived. |
 | ---- |
 ```
 
 ### stub READMEs (monorepo subprojects)
-
-minimal pointer to main docs:
 
 ```markdown
 # project name
@@ -156,26 +189,26 @@ for more information
 
 ### question-based sections
 
-works well for casual/personal projects:
-
-- `## what are the features?`
-- `## cool, how do i use it?`
-- `## could it be better?`
-- `## frequently questioned answers`
+```markdown
+## what are the features?
+## cool, how do i use it?
+## could it be better?
+## frequently questioned answers
+```
 
 ## admonitions (callouts)
 
-**default: use plaintext admonitions** (works everywhere):
+**plaintext** (default, works everywhere):
 
 ```markdown
 > **note**
-> content here (two spaces after "note" line for linebreak)
+> content here (two spaces after "note" line)
 
 > **warning**
 > content here
 ```
 
-**GitHub-style** (when writing for GitHub):
+**GitHub-style** (for GitHub):
 
 ```markdown
 > [!WARNING]
@@ -185,7 +218,7 @@ works well for casual/personal projects:
 > Additional information here.
 ```
 
-**MkDocs-style** (when writing for MkDocs/Material):
+**MkDocs-style** (for MkDocs/Material):
 
 ```markdown
 !!! warning
@@ -199,7 +232,7 @@ works well for casual/personal projects:
 
 ### definition lists
 
-use two-space linebreak for options/variables:
+Use two-space linebreak for options/variables:
 
 ```markdown
 - `VARIABLE_NAME`
@@ -214,16 +247,15 @@ use two-space linebreak for options/variables:
 
 ### CLI documentation
 
-1. embed full `--help` output in code block
-2. group options by category (clip options, output options, etc.)
-3. separate sections for: querying, defaults, formatting, examples
+1. Embed full `--help` output in code block
+2. Group options by category
+3. Separate sections for: querying, defaults, formatting, examples
 
-see [references/REFERENCE.md](references/REFERENCE.md) for full template.
+See [references/REFERENCE.md](references/REFERENCE.md) for full template.
 
 ### API reference
 
-API references follow the Meadow Docstring Format (MDF) structure, translated to markdown.
-see `mdf-majo` for the full MDF specification.
+API references follow the Meadow Docstring Format (MDF) structure. See `mdf-majo` for full MDF spec.
 
 **header format:**
 
@@ -236,8 +268,8 @@ see `mdf-majo` for the full MDF specification.
 1. **preamble** — brief one-line description (no label)
 2. **body** — longer explanation if needed (no label)
 3. **signature** — python code block with function/class signature
-4. **attributes** (for classes) or **arguments** (for functions)
-5. **methods** (for classes)
+4. **attributes** (classes) or **arguments** (functions)
+5. **methods** (classes)
 6. **returns** — return type with optional description
 7. **raises** — exceptions that may be raised
 8. **usage** — code example
@@ -314,15 +346,13 @@ glue class for pydantic models and tomlkit documents
 
 **formatting notes:**
 
-- use backticks around all python code: `` `Type` ``, `` `variable: Type` ``
-- link to other sections with anchors: `[`ClassName`](#class-moduleclassname)`
-- link to external docs when referencing third-party types
-- arguments/attributes use two-space linebreak before description
-- omit sections that add no value (e.g., obvious returns)
+- Use backticks around python code: `` `Type` ``, `` `variable: Type` ``
+- Link to other sections: `[`ClassName`](#class-moduleclassname)`
+- Link to external docs for third-party types
+- Arguments/attributes: two-space linebreak before description
+- Omit sections that add no value
 
 ### installation section
-
-show multiple methods:
 
 ```markdown
 ## installation
@@ -342,7 +372,7 @@ pip install git+https://github.com/user/project.git
 **nix users, rejoice:** `nix run github:user/project`
 ```
 
-for single-file modules, mention direct inclusion as public domain.
+For single-file modules, mention direct inclusion as public domain.
 
 ## licence documentation
 
@@ -356,15 +386,13 @@ for more information, please refer to [UNLICENCE](/UNLICENCE), <https://unlicens
 or the python module docstring.
 ```
 
-or the casual version:
+Casual version:
 
 ```markdown
 project is permissively "i do not care" licenced with the zero-clause bsd licence, go ham
 ```
 
 ### dependency licences
-
-nested list with em-dash separator:
 
 ```markdown
 - [**dependency**](url) —
@@ -378,8 +406,6 @@ nested list with em-dash separator:
 
 ### dual licensing
 
-when code and assets have different licences:
-
 ```markdown
 - source code:
   The Unlicence (full text or reference)
@@ -388,7 +414,7 @@ when code and assets have different licences:
   CC BY 4.0 with usage notes
 ```
 
-see [references/REFERENCE.md](references/REFERENCE.md) for full licence page template.
+See [references/REFERENCE.md](references/REFERENCE.md) for full licence page template.
 
 ## changelog format
 
@@ -425,20 +451,20 @@ full changelog: <https://github.com/user/repo/compare/vOLD...vNEW>
 
 ### guidelines
 
-- use ordinal dates: "1st of July 2024", "14th of October 2023"
-- use `!!! information` for tentative/beta releases
-- use `!!! warning` for breaking changes
-- include GitHub compare links at the end
-- thank contributors with profile links
-- use `---` separators between versions
+- Use ordinal dates: "1st of July 2024", "14th of October 2023"
+- Use `!!! information` for tentative/beta releases
+- Use `!!! warning` for breaking changes
+- Include GitHub compare links
+- Thank contributors with profile links
+- Use `---` separators between versions
 
-see [references/REFERENCE.md](references/REFERENCE.md) for full changelog template.
+See [references/REFERENCE.md](references/REFERENCE.md) for full changelog template.
 
 ## special elements
 
 ### personal rationale sections
 
-frequently include a "rationale" or "why" section explaining personal use case:
+Explain personal use case:
 
 ```markdown
 ## rationale
@@ -466,9 +492,9 @@ so this tool... (ties back to purpose)
 
 ## integration
 
-this skill extends `majo-standards`. works alongside:
+This skill extends `majo-standards`. Works alongside:
 
-- `mdf-majo` — for Meadow Docstring Format specification (API reference structure)
-- `python-majo` — for Python code standards
-- `shell-majo` — for shell script documentation
-- `git-majo` — for commit messages that reference docs
+- `mdf-majo` — Meadow Docstring Format specification
+- `python-majo` — Python code standards
+- `shell-majo` — Shell script documentation
+- `git-majo` — Commit messages that reference docs

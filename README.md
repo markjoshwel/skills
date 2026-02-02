@@ -1,35 +1,106 @@
-# majo-skills
+# mark's Agent Skills
 
-Agent Skills for Mark's development workflow.
+an attempt to write skills with high-signal activation because i didn't want to ask the agent to not use `head` on my windows machine, among other things
 
-## Overview
+## skills
 
-This repository contains a collection of Agent Skills that encode my (Mark's) development standards, workflows, and best practices. These skills are designed to be used with AI coding agents that support the [Agent Skills format](https://agentskills.io/).
+### core standards (always start here)
 
-## Skills
+- `majo-standards` — universal principles: British English, error handling, exit codes, AGENTS.md maintenance
+- `agents-md-authoring-majo` — writing effective AGENTS.md files (see the 6-core-areas framework)
+- `skill-authoring-majo` — creating new skills from patterns
 
-| Skill | Description |
-|-------|-------------|
-| `majo-standards` | Core development standards and universal principles |
-| `python-majo` | Python development with UV, basedpyright, mypy, ruff, and meadow docstrings |
-| `js-bun-majo` | JavaScript/TypeScript development using Bun |
-| `shell-majo` | POSIX shell scripting standards |
-| `git-majo` | Git workflow, commit standards, and repository management |
-| `docs-majo` | Documentation writing standards and style guide |
-| `task-planning-majo` | Task planning workflow for complex work |
-| `public-domain-setup-majo` | Public domain repository setup with dual licensing |
-| `windows-majo` | Windows-specific development and command alternatives |
-| `skill-authoring-majo` | Creating new Agent Skills |
-| `agents-md-authoring-majo` | Writing effective AGENTS.md files |
+### language-specific
 
-## Usage
+- `python-majo` — Python development with UV, basedpyright, ruff, Python 3.10+ syntax, and Meadow Docstring Format (MDF)
+- `js-bun-majo` — JavaScript/TypeScript using Bun (not npm, i've hopped on the Bun train)
+- `shell-majo` — POSIX shell scripting (pure sh, not bash), error handling, exit codes
+- `csharp-unity-majo` — C# development for Unity: naming conventions, British spellings, callback patterns
 
-These skills follow the [Agent Skills specification](https://agentskills.io/specification.md). Each skill is a directory containing a `SKILL.md` file with optional `references/` and `examples/` directories.
+### workflow and tooling
 
-## License
+- `git-majo` — my git workflow: auto-commit after every prompt, conventional commits, never auto-push
+- `task-planning-majo` — planning workflow for complex tasks: gather context, draft plan, 3 questions max
+- `docs-majo` — writing documentation in my voice: first person lowercase "i", casual but technical, British English
+- `mdf-majo` — Meadow Docstring Format for Python docstrings
 
-All skills in this repository are dual-licensed under [The Unlicense](https://unlicense.org/) OR [BSD Zero Clause License](https://opensource.org/licenses/0BSD) (SPDX: `Unlicense OR 0BSD`).
+### platform and setup
 
-## Author
+- `windows-majo` — working on Windows: maps Unix commands to PowerShell equivalents (`tail` → `Get-Content`, etc.)
+- `public-domain-setup-majo` — setting up repos with dual licensing (Unlicense OR 0BSD)
 
-Mark Joshwel <mark@joshwel.co>
+trying not to overbloat the skills as per [best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+
+| skill | lines | words | status |
+|-------|-------|-------|--------|
+| `agents-md-authoring-majo` | 411 | 1780 | 🟢 |
+| `csharp-unity-majo` | 221 | 944 | 🟢 |
+| `docs-majo` | 501 | 1575 | 🟡 |
+| `git-majo` | 202 | 803 | 🟢 |
+| `js-bun-majo` | 81 | 428 | 🟢 |
+| `majo-standards` | 308 | 1360 | 🟢 |
+| `mdf-majo` | 444 | 1677 | 🟢 |
+| `public-domain-setup-majo` | 357 | 1605 | 🟢 |
+| `python-majo` | 335 | 1274 | 🟢 |
+| `shell-majo` | 460 | 1612 | 🟢 |
+| `skill-authoring-majo` | 437 | 1858 | 🟢 |
+| `task-planning-majo` | 266 | 1255 | 🟢 |
+| `windows-majo` | 451 | 1520 | 🟢 |
+
+run `count.py` to update this table.trying to write decent skills
+
+for whats in a skill: <https://agentskills.io>
+
+### how skills activate
+
+skills load in three levels:
+
+1. **discovery** — only `name` + `description` loaded at startup
+2. **activation** — full SKILL.md loaded when the agent thinks it's relevant
+3. **deep dive** — `references/` and `examples/` loaded when explicitly referenced
+
+common triggers:
+
+- "writing Python code" → `python-majo`
+- "this is complex" → `task-planning-majo`  
+- "commit" → `git-majo`
+- "README" → `docs-majo`
+- "Windows" → `windows-majo`
+
+### using multiple skills together
+
+skills stack. i usually do:
+
+1. base: `majo-standards` (always)
+2. language: `python-majo`, `js-bun-majo`, etc.
+3. workflow: `git-majo`, `task-planning-majo` (as needed)
+
+### design principles
+
+- **clear activation triggers** — the `description` is the main signal. be specific: "Python with UV" not "a skill about code"
+- **actionable instructions** — tell the agent HOW ("use `uv add`") not what ("uv is a package manager")
+- **explicit boundaries** — always have "when to use" AND "do NOT use" sections
+- **test before shipping** — check that the skill triggers when it should and doesn't when it shouldn't
+
+### skills vs AGENTS.md
+
+these work alongside AGENTS.md (project-specific knowledge):
+
+- use **AGENTS.md** for: project-specific stuff, exact flags, version-matched docs
+- use **skills** for: cross-project patterns, large content, workflows
+
+AGENTS.md wins because it's always loaded. skills win for stuff that doesn't fit.
+
+### validating skills
+
+for my own use lol:
+
+```powershell
+for /d %i in (majo-skills\*) do @echo Validating %i... && uvx --refresh --from ./agentskills/skills-ref skills-ref validate "%i"
+```
+
+## licence
+
+all skills are dual-licensed under [The Unlicense](https://unlicense.org/) OR [BSD Zero Clause License](https://opensource.org/licenses/0BSD) (SPDX: `Unlicense OR 0BSD`).
+
+go ham.

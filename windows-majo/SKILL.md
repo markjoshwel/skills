@@ -1,6 +1,17 @@
 ---
 name: windows-majo
-description: Windows-specific development standards and command alternatives. Use when working on Windows systems to avoid Unix-isms like tail, head, mkdir -p, and to recognize Windows paths (B:\path\to\file). Ensures cross-platform compatibility and proper Windows command usage.
+description: Windows-specific development standards and command alternatives.
+triggers:
+  - "Windows path"
+  - "Windows system"
+  - "win32 platform"
+  - "B:\\path"
+  - "C:\\path"
+  - "Unix-isms"
+  - "PowerShell"
+  - "cmd.exe"
+  - "backslash path"
+tags: [windows, platform, powershell, cross-platform]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -9,15 +20,58 @@ metadata:
 
 # Windows Development Standards (Mark)
 
-Guidelines for working on Windows systems and avoiding Unix-isms.
+**Goal**: Write cross-platform compatible code that recognizes Windows-specific paths and avoids Unix-isms when working on Windows systems.
 
 ## When to Use This Skill
 
-- Working on Windows (win32) systems
-- Path starts with drive letter (e.g., `B:\`, `C:\`)
-- Using backslashes in paths (`\` not `/`)
-- Commands fail with "not recognized" errors
-- Need to avoid Unix-specific tools
+- **Working on Windows (win32) systems**
+- **Path starts with drive letter** (e.g., `B:\`, `C:\`)
+- **Using backslashes in paths** (`\` not `/`)
+- **Commands fail with "not recognized" errors**
+- **Need to avoid Unix-specific tools** (tail, head, mkdir -p, etc.)
+- **Writing cross-platform scripts** that must work on Windows
+- **Using PowerShell or cmd.exe**
+
+## When NOT to Use This Skill
+
+- **Working on macOS or Linux exclusively**
+- **Using WSL (Windows Subsystem for Linux)** - Unix commands work there
+- **Using Git Bash** - Provides Unix tools on Windows
+- **Writing Unix-only scripts** for deployment to Linux servers
+
+## Process
+
+1. **Check platform first** - Verify if running on Windows (`win32`)
+2. **Identify Windows paths** - Look for drive letters (`B:`, `C:`) and backslashes
+3. **Map Unix commands to Windows equivalents**:
+   - `mkdir -p` → `New-Item -ItemType Directory -Path "path" -Force`
+   - `tail` → `Get-Content file -Tail N`
+   - `head` → `Get-Content file -TotalCount N`
+   - `cat` → `Get-Content` or `type`
+   - `grep` → `Select-String`
+   - `find` → `Get-ChildItem -Recurse`
+   - `ls` → `Get-ChildItem` or `dir`
+   - `rm -rf` → `Remove-Item -Recurse -Force`
+   - `cp/mv` → `Copy-Item/Move-Item`
+   - `touch` → `New-Item -ItemType File`
+   - `which` → `Get-Command` or `where`
+   - `pwd` → `Get-Location`
+4. **Quote paths with spaces** - Use `"path with spaces"`
+5. **Use backslashes** - Even though forward slashes often work
+6. **Prefer cross-platform tools** - Python, Node.js when possible
+7. **Update AGENTS.md** - Document Windows-specific requirements
+
+## Constraints
+
+- **ALWAYS check platform** before using Unix commands
+- **ALWAYS use backslashes** for Windows paths (even though forward slashes often work)
+- **ALWAYS quote paths with spaces** to avoid errors
+- **NEVER use Unix-isms on Windows**: `tail`, `head`, `mkdir -p`, `grep`, `find` (Unix style)
+- **NEVER use `cd` with forward slashes** on Windows cmd (PowerShell is more flexible)
+- **Prefer PowerShell** for modern Windows development
+- **Prefer Python** for cross-platform scripts over shell
+
+Guidelines for working on Windows systems and avoiding Unix-isms.
 
 ## Recognizing Windows Paths
 
@@ -362,6 +416,16 @@ If available, Git Bash provides Unix tools on Windows. However, prefer native Po
 | `touch file` | `New-Item file -ItemType File` | `type nul > file` |
 | `which cmd` | `Get-Command cmd` | `where cmd` |
 | `pwd` | `Get-Location` | `cd` |
+
+## Testing Skills
+
+- **Platform check**: Verify commands work on Windows (`win32`)
+- **Path format test**: Use backslashes (`\`) not forward slashes (`/`)
+- **Command mapping**: Test Unix → Windows command equivalency
+- **Quote handling**: Test paths with spaces are properly quoted
+- **Cross-platform**: Verify Python scripts work on both Windows and Unix
+- **PowerShell vs cmd**: Know which syntax works in which shell
+- **WSL detection**: Don't use Windows workarounds when in WSL (Unix works there)
 
 ## Integration
 

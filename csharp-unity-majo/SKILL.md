@@ -1,6 +1,17 @@
 ---
 name: csharp-unity-majo
-description: C# and Unity development standards for Mark's projects. Use when writing C# code, especially for Unity game development. Covers naming conventions, XML documentation, callback patterns, and Debug.Log formatting.
+description: C# and Unity development standards for Mark's projects.
+triggers:
+  - "C# code"
+  - "Unity development"
+  - "game development"
+  - "Unity script"
+  - "MonoBehaviour"
+  - "csharp"
+  - ".cs file"
+  - "Unity project"
+  - "Debug.Log"
+tags: [csharp, unity, game-development, mono]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -8,6 +19,51 @@ metadata:
 ---
 
 # C# and Unity Standards (Mark)
+
+**Goal**: Write consistent, well-documented C# code for Unity game development following specific naming conventions, XML documentation standards, and British spelling preferences.
+
+## When to Use This Skill
+
+- **Writing C# code for Unity**
+- **Creating Unity MonoBehaviour scripts**
+- **Writing C# class libraries for games**
+- **Implementing Unity event systems**
+- **Writing Firebase or external service integrations in Unity**
+- **Documenting C# public APIs**
+- **Setting up callback registration patterns**
+
+## When NOT to Use This Skill
+
+- **Writing C# for non-Unity projects** (use general C# standards)
+- **Writing code for non-gaming contexts**
+- **Contributing to external C# projects** with different conventions
+- **Writing in other languages** (JavaScript, Python, etc.)
+
+## Process
+
+1. **Check project context** - Verify this is a Unity/C# project
+2. **Apply naming conventions by access level**:
+   - `public` → camelCase
+   - `protected` → PascalCase
+   - `private` → _camelCase
+3. **Methods always use PascalCase** - Regardless of access level
+4. **Add XML documentation** - For all public APIs with `<summary>`, `<param>`, `<returns>`
+5. **Use British spellings** - In code identifiers and documentation
+6. **Implement callback pattern** - Use List<Action<T>> with Register/Fire methods
+7. **Format Debug.Log messages** - Lowercase, consistent with error format
+8. **Preserve external naming** - When porting code, keep original naming with source comment
+9. **Update AGENTS.md** - Document project-specific Unity/C# patterns
+
+## Constraints
+
+- **ALWAYS use British spellings** in code identifiers and documentation (colour, initialise, behaviour)
+- **ALWAYS use PascalCase for methods** regardless of access level
+- **ALWAYS use _camelCase for private fields** (prefix with underscore)
+- **ALWAYS preserve external code naming** when porting with source attribution
+- **NEVER use American spellings** except when interfacing with Unity/.NET APIs (Color, MonoBehaviour)
+- **NEVER use lowercase for method names** (even private methods)
+- **NEVER rename external ported code** - Preserve original naming for traceability
+- **Exception for Unity/.NET APIs**: Use their American spelling when directly referencing (Color, MonoBehaviour, Initialize)
 
 Standards for writing C# code, with Unity-specific patterns.
 
@@ -138,6 +194,17 @@ Common C# examples:
 - `Normalise()` not `Normalize()`
 
 **Exception**: When interfacing with Unity or .NET APIs that use American spellings (e.g., `MonoBehaviour`, `Color`), use the API's spelling for that specific reference.
+
+## Testing Skills
+
+- **Naming convention check**: Verify field naming by access level (public camelCase, protected PascalCase, private _camelCase)
+- **Method naming test**: All methods use PascalCase, never lowercase or _camelCase
+- **XML documentation validation**: Public APIs have `<summary>`, `<param>`, `<returns>` tags
+- **British spelling verification**: Check colour, initialise, behaviour (not color, initialize, behavior)
+- **Callback pattern test**: List<Action<T>> with Register/Fire methods and try-catch
+- **Debug.Log format**: Lowercase messages with consistent format
+- **External code preservation**: Ported code keeps original naming with source attribution
+- **Unity API exception**: Color, MonoBehaviour use American spelling as required by Unity
 
 ## Integration
 

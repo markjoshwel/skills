@@ -1,13 +1,62 @@
 ---
 name: mdf-majo
-description: Meadow Docstring Format (MDF) specification for Python documentation. Use when writing docstrings for Python code. Provides a plaintext-first, readable format that closely follows Python syntax.
+description: Meadow Docstring Format (MDF) specification for Python documentation. Use when writing, editing, or reviewing docstrings for Python code. Provides a plaintext-first, readable format that closely follows Python syntax. Trigger when the user mentions docstrings, Python documentation, function documentation, class documentation, or writing documentation for Python code.
 license: Unlicense
+tags: [python, docstrings, documentation, mdf, meadow]
 metadata:
   author: mark@joshwel.co
   version: "2026.2.2"
 ---
 
 # Meadow Docstring Format (MDF)
+
+## Goal
+
+Standardize Python docstring formatting to be plaintext-first, readable, and closely aligned with Python syntax. MDF provides an intuitive documentation style that works across editors while maintaining clarity and consistency.
+
+## When to Use This Skill
+
+**Use this skill when:**
+- Writing new docstrings for Python functions, classes, or modules
+- Editing or reviewing existing Python documentation
+- The user asks about docstring format or Python documentation style
+- Adding documentation to Python codebases following the meadow standards
+- Reviewing code that lacks proper documentation
+
+## Do NOT use
+
+- For general markdown documentation (use `docs-majo` instead)
+- For non-Python languages
+- For external API documentation not embedded in Python code
+- When the user explicitly requests a different docstring format (Google, NumPy, Sphinx)
+- For standalone README files (use `docs-majo`)
+
+## Process
+
+1. **Identify what needs documentation**: Check if functions, classes, or methods lack docstrings
+2. **Determine section requirements**: Check the Format Overview table to see which sections are needed
+3. **Write the preamble**: One-line description that starts with a lowercase letter
+4. **Add optional body**: Longer explanation if the functionality is complex
+5. **Document signatures**: Add `attributes`, `arguments`, or `parameters` for incoming data
+6. **Document exports**: Add `functions` or `methods` for outgoing APIs
+7. **Add returns and raises**: Document return types and exceptions
+8. **Include usage examples**: Add code examples for complex functionality
+9. **Review against constraints**: Ensure Python syntax is modern and all code uses backticks
+
+## Constraints
+
+- **Always use latest Python syntax**: Use `T | None` instead of `Optional[T]`, even for older Python versions
+- **Always wrap code in backticks**: All Python code in docstrings must be surrounded by backticks
+- **Preamble starts lowercase**: The first line should begin with a lowercase letter
+- **Follow section order**: Preamble → Body → Signatures → Functions/Methods → Returns → Raises → Usage
+
+## Testing Skills
+
+- Verify docstrings follow the Format Overview section order
+- Check that all Python syntax uses modern patterns (`|` union syntax)
+- Ensure backticks wrap all code elements in the docstring
+- Confirm one-line preamble starts with a lowercase letter
+- Test that usage examples are valid Python code
 
 A plaintext-first alternative documentation string style for Python.
 

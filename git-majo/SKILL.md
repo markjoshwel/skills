@@ -1,7 +1,14 @@
 ---
 name: git-majo
-description: Git workflow standards for Mark's projects. Use when making commits, creating branches, or managing git history. Covers commit message format, auto-commit policy, and push behavior.
+description: |
+  Git workflow standards for Mark's projects.
+  Trigger when user mentions: "commit", "committing", "git commit",
+  "git history", "branches", "branching", "push to remote",
+  "create a pull request", "PR", "merge conflict",
+  or when performing any git operation.
+  Covers commit message format, auto-commit policy, and push behavior.
 license: Unlicense OR 0BSD
+tags: [git, version-control, commits, workflow]
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
@@ -9,7 +16,38 @@ metadata:
 
 # Git Workflow Standards (Mark)
 
-Git standards for commit messages, auto-commits, and repository management.
+## Goal
+
+Enable consistent, traceable git history that tracks LLM prompt count per feature/bug fix while following conventional commits format.
+
+## When to Use This Skill
+
+**Use when:**
+- User asks to commit changes
+- Creating or managing branches
+- Working with git history
+- Setting up pull requests
+- Any git operation mentioned in prompt
+
+**Do NOT use when:**
+- User explicitly says "do not commit"
+- Working in a non-git directory (no .git folder)
+
+## Process
+
+1. **Check status**: Run `git status` and `git diff` to see changes
+2. **Review conventions**: Check `git log --oneline -10` for existing commit style
+3. **Stage changes**: `git add <files>`
+4. **Commit**: Use conventional format with original prompt in description
+5. **Stop**: Do not push unless explicitly told to
+
+## Constraints
+
+- **ALWAYS commit after every prompt** (unless user says "do not commit")
+- **One commit per prompt** (unless prompt asks for multiple)
+- **NEVER auto-push** - wait for explicit push instruction
+- **Include original prompt** in commit description (shortened if lengthy)
+- **Match existing style** from repository history
 
 ## Auto-Commit Policy
 
@@ -137,6 +175,15 @@ git log -1
 ```
 
 Match the style of existing commits in the repository.
+
+## Testing Skills
+
+After creating or updating this skill:
+
+1. Check the description triggers properly when git operations are mentioned
+2. Verify commit format examples render correctly
+3. Test that Constraints section is easily scannable
+4. Confirm all existing content is preserved
 
 ## Integration
 

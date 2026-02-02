@@ -1,6 +1,16 @@
 ---
 name: agents-md-authoring-majo
-description: Write effective AGENTS.md files for AI coding agents. Use when creating or updating AGENTS.md to ensure high signal-to-noise ratio, proper structure, and maximum agent effectiveness. Based on Vercel research showing AGENTS.md achieves 100% pass rate vs 79% with skills.
+description: Write effective AGENTS.md files for AI coding agents.
+triggers:
+  - "create AGENTS.md"
+  - "update AGENTS.md"
+  - "AGENTS.md file"
+  - "agents.md authoring"
+  - "writing AGENTS.md"
+  - "AI agent context"
+  - "project context file"
+  - "agent documentation"
+tags: [agents-md, documentation, project, vercel]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
@@ -8,6 +18,54 @@ metadata:
 ---
 
 # AGENTS.md Authoring Guide (Mark)
+
+**Goal**: Write effective, high-signal-to-noise AGENTS.md files that outperform skills-based approaches (100% vs 79% pass rate based on Vercel research).
+
+## When to Use This Skill
+
+- **Creating a new AGENTS.md file**
+- **Updating an existing AGENTS.md**
+- **Optimizing agent context** for better performance
+- **Converting from skills-based approach to AGENTS.md**
+- **Setting up project documentation for AI agents**
+- **Monorepo with nested AGENTS.md files**
+
+## When NOT to Use This Skill
+
+- **Writing end-user documentation** (use `docs-majo`)
+- **Creating a new skill** (use `skill-authoring-majo`)
+- **Small project with obvious conventions** (AGENTS.md may be overkill)
+- **Documentation for non-agent consumption**
+
+## Process
+
+1. **Check existing AGENTS.md** - Read current file if it exists
+2. **Measure current token count** - Target root file ≤ 800 tokens
+3. **Apply 6-Core-Areas Framework**:
+   - Commands (~80 tokens) - Exact copy-paste commands
+   - Testing (~50 tokens) - Framework, location, coverage, run command
+   - Project Structure (~50 tokens) - Strategic hints only
+   - Code Style (~75 tokens) - One real example with positive & negative
+   - Git Workflow (~40 tokens) - Commit format, branch naming, PR requirements
+   - Boundaries (~50 tokens) - Always/Ask/Never three-tier system
+4. **Use real code examples** - From the actual project, not templates
+5. **Apply progressive disclosure** - Link to detailed docs, don't inline
+6. **Add three-tier boundaries** - ALWAYS/ASK FIRST/NEVER format
+7. **Verify token count** - Ensure root ≤ 800 tokens
+8. **Test with real tasks** - Run agents on actual work, observe mistakes
+9. **Iterate** - Update AGENTS.md after each agent mistake
+10. **Update AGENTS.md** - Document that AGENTS.md was modified
+
+## Constraints
+
+- **ALWAYS keep root AGENTS.md ≤ 800 tokens** - Maximize signal-to-noise
+- **ALWAYS minimize root file** - Strategic structure over exhaustive docs
+- **ALWAYS use six-core-areas framework** - Commands, Testing, Structure, Style, Git, Boundaries
+- **ALWAYS use three-tier boundaries** (Always/Ask/Never) - More effective than flat lists
+- **NEVER include file structure documentation** - Agents infer this; it drifts
+- **NEVER duplicate README/docs** - Link instead
+- **NEVER use vague guidance** - "Be careful" → "Never do X without..."
+- **UPDATE immediately after agent mistakes** - Track in git
 
 Write effective AGENTS.md files that outperform skills-based approaches.
 
@@ -321,6 +379,16 @@ Agents use the nearest AGENTS.md (like .gitignore). Keeps context tight and rele
 - [ ] Updated after every agent mistake
 - [ ] Nested AGENTS.md for monorepos (if applicable)
 - [ ] Progressive disclosure for large docs
+
+## Testing Skills
+
+- **Token count check**: Ensure root AGENTS.md ≤ 800 tokens (use wc or estimate)
+- **Structure verification**: Confirm all 6 core areas are present
+- **Boundary clarity**: Check Always/Ask/Never tiers are specific, not vague
+- **Real examples test**: Verify code examples actually exist in the repo
+- **Link validation**: Ensure linked docs exist and are accessible
+- **Agent run test**: Perform a real task, verify agent follows AGENTS.md guidance
+- **Iteration tracking**: Document each update and the mistake it fixed
 
 ## Integration with Other Skills
 

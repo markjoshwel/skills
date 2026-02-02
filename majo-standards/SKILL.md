@@ -1,15 +1,97 @@
 ---
 name: majo-standards
-description: Mark's core development standards and conventions. Use for any code generation to ensure consistency with maintainable, readable code that follows established patterns. Covers universal principles like code style, documentation policies, and AGENTS.md maintenance.
+description: >
+  Mark's core development standards and conventions. Use for any code generation to ensure
+  consistency with maintainable, readable code that follows established patterns. Covers
+  universal principles like code style, documentation policies, error handling, exit codes,
+  British English spellings, and AGENTS.md maintenance.
 license: Unlicense
 metadata:
-  author: mark@joshwel.co
+  author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
+  tags: [standards, core, conventions, universal, quality]
 ---
 
 # Mark's Development Standards
 
 Core development standards that apply across all languages and projects.
+
+## Goal
+
+Ensure all generated code is maintainable, readable, and consistent with established
+patterns. Enforce British English, proper error handling, and AGENTS.md maintenance
+across every project and language.
+
+## When to Use This Skill
+
+**Use this skill when:**
+- Starting work on any codebase
+- Generating new code in any language
+- Refactoring existing code
+- Unsure about documentation requirements
+- Need to maintain AGENTS.md
+- Writing error messages or handling failures
+- Unsure about spelling (British vs American English)
+
+**Do NOT use this skill when:**
+- You need language-specific guidance (use `python-majo`, `js-bun-majo`, etc.)
+- You're only reading code without making changes
+- The task is purely exploratory with no code generation
+
+## Process
+
+### Step 1: Check for AGENTS.md
+
+Always check for AGENTS.md first:
+
+```bash
+# Check if AGENTS.md exists
+ls AGENTS.md AGENTS.PLAN.md 2>/dev/null || echo "No AGENTS.md found"
+
+# Read it if it exists
+cat AGENTS.md
+```
+
+### Step 2: Apply Universal Principles
+
+For every code generation task:
+
+1. **Maintainability First** - Code should be readable and modular
+2. **Self-Documenting** - Clear variable names, no excessive comments
+3. **Diagnostic Cleanliness** - No errors or warnings (suppress only when reasonable)
+4. **British English** - colour, behaviour, licence (noun), initialise, etc.
+
+### Step 3: Follow Error Handling Standards
+
+Use consistent error format:
+```
+program: level: message
+```
+
+**Print to stderr and use specific exit codes** (grouped by category):
+- `0` - Success
+- `1-29` - Usage errors
+- `30-49` - Input errors  
+- `50-69` - File/IO errors
+- `70-89` - Processing errors
+- `255` - Runtime error
+
+### Step 4: Update AGENTS.md
+
+After any significant work:
+- Update knowledge of codebase
+- Note code style and structure
+- Record practices and methodologies
+- Update current task status
+
+## Constraints
+
+- **Always use British English** - colour, behaviour, licence (noun), initialise, organised, centre (physical location)
+- **Never exceed 800 tokens in AGENTS.md root** - Use progressive disclosure for larger docs
+- **Always include SPDX identifiers** in new source files
+- **Never commit without checking AGENTS.md first**
+- **Always quote variables** in shell scripts to prevent word splitting
+- **Never use vague guidance** - Be specific: "Never commit secrets" not "Be careful with secrets"
 
 ## British English (Strict Requirement)
 
@@ -179,15 +261,6 @@ Maintain an `AGENTS.md` file with:
 
 **Grok-code-fast-1**: Do NOT use regex-based or purely wildcard workspace/file content searches. Use globs or regexes that have a non-wildcard component.
 
-## When to Use This Skill
-
-Activate this skill when:
-- Starting work on any codebase
-- Generating new code
-- Refactoring existing code
-- Unsure about documentation requirements
-- Need to maintain AGENTS.md
-
 ## SPDX License Identifiers
 
 When creating new source files in public domain projects, add the appropriate SPDX identifier at the top:
@@ -201,6 +274,19 @@ When creating new source files in public domain projects, add the appropriate SP
 ```python
 # SPDX-License-Identifier: 0BSD
 ```
+
+## Testing Skills
+
+Before relying on this skill, test implicit invocation:
+
+**Should trigger:**
+- "Help me write a Python script"
+- "Refactor this code"
+- "Create a new function"
+
+**Should NOT trigger:**
+- "Read this file for me" (no code generation)
+- "Explain what this code does" (exploratory only)
 
 ## Integration
 
@@ -216,5 +302,6 @@ This skill works alongside language-specific skills:
 - `skill-authoring-majo` - Creating new Agent Skills
 - `agents-md-authoring-majo` - Writing effective AGENTS.md files
 - `csharp-unity-majo` - C#/Unity development standards
+- `mdf-majo` - Meadow Docstring Format for Python
 
-Always load this skill first, then the appropriate language-specific skill.
+**Always load this skill first**, then the appropriate language-specific skill.
