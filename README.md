@@ -49,7 +49,7 @@ trying not to overbloat the skills as per [best practices](https://platform.clau
 | `shell-majo` | 450 | 1583 | 🟢 |
 | `skill-authoring-majo` | 436 | 1852 | 🟢 |
 | `task-planning-majo` | 265 | 1250 | 🟢 |
-| `writing-docs-majo` | 490 | 1446 | 🟢 |
+| `writing-docs-majo` | 490 | 1451 | 🟢 |
 
 run `count.py` to update this table.
 
