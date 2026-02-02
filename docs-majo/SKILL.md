@@ -13,6 +13,18 @@ Standards for writing user-facing documentation.
 
 ## Writing Style
 
+### Spelling
+
+**Use British English spellings throughout all documentation.** See `majo-standards` for the complete list.
+
+Common documentation words:
+
+- **colour** (not color)
+- **licence** (noun) / **license** (verb)
+- **behaviour** (not behavior)
+- **favourite** (not favorite)
+- **center** (technical/abstract, e.g. image center) / **centre** (a physical location, e.g. town centre)
+
 ### Tone
 
 - **Casual and conversational** — write like you're talking to a friend

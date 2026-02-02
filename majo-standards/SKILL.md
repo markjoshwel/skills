@@ -11,6 +11,23 @@ metadata:
 
 Core development standards that apply across all languages and projects.
 
+## British English (Strict Requirement)
+
+**Always use British English spellings throughout all code and documentation.**
+
+Common documentation words:
+- **colour** (not color)
+- **licence** (noun) / **license** (verb)
+- **behaviour** (not behavior)
+- **favourite** (not favorite)
+- **organised** (not organized)
+- **initialise** (not initialize)
+- **center** (technical/abstract, e.g. image center) / **centre** (a physical location, e.g. town centre)
+- **recognised** (not recognized)
+- **genericised** (not genericized)
+
+**Exception**: Standard file names like `LICENSE` and `LICENSE-0BSD` use American spelling for compatibility with tooling and conventions.
+
 ## Universal Code Principles
 
 ### Code Quality
@@ -55,6 +72,68 @@ result = process(config)
 - Group related constants together
 - Keep functions/methods focused on single responsibility
 - Separate I/O from business logic where possible
+
+## Error Handling
+
+### Message Format
+
+Use a consistent format across all languages:
+
+```
+program: level: message
+```
+
+**Levels** (in order of severity):
+- `error:` — Fatal errors requiring exit
+- `internal error:` — Bugs or unexpected failures
+- `warning:` or `warn:` — Non-fatal issues
+- `info:` — Status updates
+- `debug:` — Verbose debugging (only when debug mode enabled)
+
+**Examples**:
+```python
+print(f"surplus: error: {exc}", file=stderr)
+print(f"zigbpy: internal error: {exc.__class__.__name__}", file=stderr)
+print(f"warn: '{target}' does not exist, skipping", file=stderr)
+```
+
+### Follow-up Notes
+
+Provide additional context using `... note:` prefix:
+
+```python
+print(f"zigbpy: error: unmatched brackets at depth {depth}", file=stderr)
+print(f"... note: depth {depth} - program index {start} -> {end} [unmatched]", file=stderr)
+```
+
+### Exit Codes
+
+Group exit codes by category:
+
+- `0`: Success
+- `-1` (or `255`, depending on platform): Runtime error, unexpected crash
+- Usage errors
+- Input errors
+- File/IO errors
+- Memory errors
+- Processing errors
+
+and so on, using ranges for each category,
+e.g. `1-29` for usage errors, `30-49` for input errors, and so on,
+depending on how many errors and categories you have and/or expect to encounter.
+
+**Example** (document at top of CLI scripts):
+
+```python
+# exit codes:
+# 0  - success
+# 1  - bad command usage or missing env vars
+# 2  - bad target
+# 3  - could not send message
+# 10 - invalid input format
+# 20 - file not found
+# 255 - runtime error
+```
 
 ### File Operations
 
@@ -127,7 +206,7 @@ When creating new source files in public domain projects, add the appropriate SP
 
 This skill works alongside language-specific skills:
 - `python-majo` - Python-specific standards (UV, basedpyright, MDF)
-- `js-bun-majo` - JavaScript/Bun standards
+- `js-bun-majo` - JavaScript/TypeScript/Bun standards
 - `shell-majo` - POSIX shell scripting standards
 - `git-majo` - Git workflow and commit standards
 - `docs-majo` - Documentation writing standards
@@ -136,5 +215,6 @@ This skill works alongside language-specific skills:
 - `windows-majo` - Windows-specific command alternatives
 - `skill-authoring-majo` - Creating new Agent Skills
 - `agents-md-authoring-majo` - Writing effective AGENTS.md files
+- `csharp-unity-majo` - C#/Unity development standards
 
 Always load this skill first, then the appropriate language-specific skill.

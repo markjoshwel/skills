@@ -115,6 +115,27 @@ LOCATION_TIMEOUT="${LOCATION_TIMEOUT:-50}"
 
 ## Error Handling
 
+### Message Format
+
+Use the same format as `majo-standards` (see that skill for full details):
+
+```
+program: level: message
+```
+
+**Examples:**
+```bash
+printf "s+ow: error: surplus is not installed\n" >&2
+printf "s+ow: warn: using fallback location\n" >&2
+printf "s+ow: info: starting location fetch\n" >&2
+```
+
+**Follow-up notes** for additional context:
+```bash
+printf "s+ow: error: location fetch failed\n" >&2
+printf "... note: timeout was %d seconds\n" "$LOCATION_TIMEOUT" >&2
+```
+
 ### Exit on Error
 
 Use `set -e` at the top of scripts:
@@ -128,18 +149,31 @@ set -e
 Check if commands exist before using:
 ```bash
 if ! command -v "$SURPLUS_EXE" >/dev/null 2>&1; then
-    printf "s+ow: error: surplus is not installed.\n"
+    printf "s+ow: error: surplus is not installed\n" >&2
     exit 2
 fi
 ```
 
-### Specific Exit Codes
+### Exit Codes
 
-Use meaningful exit codes:
-- `0` - Success
-- `1` - General error
-- `2` - Command not found/missing dependency
-- `3` - Specific operation failed
+Use the grouping convention from `majo-standards`:
+
+| Range | Category |
+|-------|----------|
+| `0` | Success |
+| `1-9` | Usage errors (bad args, missing env) |
+| `10-19` | Input errors |
+| `20-29` | File/IO errors |
+| `255` | Runtime error |
+
+**Example header:**
+```bash
+# exit codes:
+# 0  - success
+# 1  - bad command usage
+# 2  - missing dependency
+# 20 - file not found
+```
 
 ## Control Structures
 

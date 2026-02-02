@@ -93,8 +93,6 @@ Use modern syntax:
 
 ```python
 # ✅ CORRECT - Python 3.10+ syntax
-from __future__ import annotations
-
 def process(items: list[str]) -> dict[str, int | None]:
     result: list[int] = []
     value: str | None = None
@@ -111,39 +109,67 @@ def process(items: List[str]) -> Dict[str, Optional[int]]:
 
 ### File Structure
 
-**All Python files must start with the full Unlicense header:**
+All Python files must include a license header.
+
+**Canonical header format:**
 
 ```python
 """
-module_name: brief description
---------------------------------
-by mark <mark@joshwel.co>
-
-This is free and unencumbered software released into the public domain.
-
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
-
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-
-For more information, please refer to <http://unlicense.org/>
+project-name: brief description
+  with all my heart, 2024-2025, mark joshwel <mark@joshwel.co>
+  SPDX-License-Identifier: Unlicense OR 0BSD
 """
+```
+
+Key points:
+- First line: project name and brief description
+- Second line: attribution with year range (indented 2 spaces)
+- Third line: SPDX identifier (indented 2 spaces)
+- Use year range for ongoing projects (e.g., `2024-2025`), single year for one-off scripts
+
+**Standard file organisation:**
+
+```python
+"""
+project-name: brief description
+  with all my heart, 2024-2025, mark joshwel <mark@joshwel.co>
+  SPDX-License-Identifier: Unlicense OR 0BSD
+"""
+
+# Standard library imports
+from pathlib import Path
+from typing import Final, NamedTuple
+
+# Third-party imports (prefix to avoid pollution)
+from somelib import Thing as _Thing
+
+# Local imports
+from .utils import Result
+
+# === Constants ===
+VERSION: Final[str] = "1.0.0"
+
+# === Type Aliases ===
+Query: TypeAlias = str | Path
+
+# === Exceptions ===
+class ProjectError(Exception): ...
+
+# === Data Types ===
+class Config(NamedTuple):
+    debug: bool = False
+
+# === Helper Functions ===
+def _internal_helper(): ...
+
+# === Core Functions ===
+def process(config: Config) -> Result[Output]: ...
+
+# === CLI ===
+def cli() -> int: ...
+
+if __name__ == "__main__":
+    exit(cli())
 ```
 
 ### Import Organization
@@ -195,6 +221,118 @@ SHAREABLE_KEYS: Final[dict[str, tuple[str, ...]]] = {
 # Variables
 result: list[int] = []
 config: dict[str, Any] = {}
+```
+
+## Data Types
+
+### NamedTuple Over Dataclass
+
+**Strongly prefer `NamedTuple` for structured data.** Only use `dataclass` when mutability is required.
+
+```python
+# ✅ PREFERRED - NamedTuple (immutable, hashable, unpacking)
+class Behaviour(NamedTuple):
+    """typed configuration object"""
+    query: str | list[str] = ""
+    geocoder: SurplusGeocoderProtocol = default_geocoding.geocoder
+    debug: bool = False
+
+class AfterlifeValues(NamedTuple):
+    # grouped with comments
+    lust: float
+    gluttony: float
+    greed: float
+
+# ❌ AVOID - dataclass (unless mutability required)
+@dataclass
+class Config:
+    debug: bool = False
+```
+
+**When to use dataclass**: Only when you need mutability, and prefer `@dataclass(frozen=True)` when possible.
+
+### Result Type Pattern
+
+Use a railway-oriented `Result` type for safe error handling. See [examples/result_type.py](examples/result_type.py) for the full implementation.
+
+**Core pattern:**
+
+```python
+class Result(NamedTuple, Generic[ResultType]):
+    """
+    result type for safe value retrieval
+    
+    - Falsy when error is present (use `if not result:`)
+    - `.get()` returns value or raises stored error
+    - `.cry()` raises error or returns error as string
+    """
+    value: ResultType
+    error: BaseException | None = None
+
+    def __bool__(self) -> bool:
+        return self.error is None
+
+    def get(self) -> ResultType:
+        if self.error is not None:
+            raise self.error
+        return self.value
+
+    def cry(self, string: bool = False) -> str:
+        if self.error is None:
+            return ""
+        if string:
+            return f"({self.error.__class__.__name__}) {self.error}"
+        raise self.error
+```
+
+**Usage:**
+
+```python
+def parse_file(path: Path) -> Result[Data]:
+    try:
+        data = do_parsing(path)
+        return Result(data)
+    except Exception as exc:
+        return Result(EMPTY_DATA, error=exc)
+
+# Caller
+result = parse_file(some_path)
+if not result:
+    print(f"error: {result.cry(string=True)}", file=stderr)
+    exit(1)
+data = result.get()
+```
+
+### Factory Methods
+
+Use `from_*` static methods returning `Result`:
+
+```python
+class DaycircleDate(NamedTuple):
+    day: int
+    month: int
+    year: int
+
+    @staticmethod
+    def from_str(date: str) -> Result["DaycircleDate"]:
+        try:
+            parts = date.split("-")
+            return Result(DaycircleDate(int(parts[0]), int(parts[1]), int(parts[2])))
+        except Exception as exc:
+            return Result(DaycircleDate(0, 0, 0), error=exc)
+```
+
+### Exception Hierarchies
+
+Use `...` (ellipsis) for empty class bodies:
+
+```python
+class SurplusError(Exception):
+    """base exception for surplus"""
+
+class NoSuitableLocationError(SurplusError): ...
+class IncompletePlusCodeError(SurplusError): ...
+class PlusCodeNotFoundError(SurplusError): ...
 ```
 
 ### Comments
@@ -368,6 +506,212 @@ def get_field(self, default: object = None) -> object:
 
     returns: `object`
     """
+```
+
+## Python-Specific Patterns
+
+### Walrus Operator (`:=`)
+
+Use assignment expressions for inline binding:
+
+```python
+# In conditionals
+if (match := pattern.search(text)) is not None:
+    process(match.group(1))
+
+# In list comprehensions
+results = [y for x in data if (y := transform(x)) is not None]
+
+# With path operations
+if (config := Path("config.toml")).exists():
+    load_config(config)
+
+# Creating and using directory
+(output_dir := Path.cwd().joinpath("output")).mkdir(parents=True, exist_ok=True)
+```
+
+### Match/Case (Python 3.10+)
+
+Use structural pattern matching for dispatch:
+
+```python
+# Command dispatch
+match argv[1:]:
+    case ["validate"]:
+        validate()
+    case ["process", filename]:
+        process(Path(filename))
+    case ["convert", *files]:
+        for f in files:
+            convert(Path(f))
+    case _:
+        print_usage()
+
+# Type dispatch
+match input_value:
+    case str():
+        return parse_string(input_value)
+    case Path():
+        return parse_file(input_value)
+    case list():
+        return [process(item) for item in input_value]
+    case _:
+        raise TypeError(f"unexpected type: {type(input_value)}")
+
+# Tuple destructuring
+match instruction:
+    case (Operation.POINTER_LEFT, count):
+        return f"left({count})"
+    case (Operation.OUTPUT, 1):
+        return "output()"
+    case _:
+        raise NotImplementedError(instruction)
+```
+
+### for...else Pattern
+
+Use `else` clause after loops (runs only if loop completed without `break`):
+
+```python
+for candidate in candidates:
+    if is_valid(candidate):
+        result = candidate
+        break
+else:
+    # Only runs if loop completed without break
+    result = default_value
+    print("warn: no valid candidate found, using default", file=stderr)
+```
+
+### Numbered Steps in main()
+
+Use numbered comments to structure main functions:
+
+```python
+def main() -> None:
+    # 0. parse arguments
+    behaviour = parse_args()
+    
+    # 1. validate inputs
+    if error := validate(behaviour):
+        print(f"error: {error}", file=stderr)
+        exit(1)
+    
+    # 2. load data
+    data = load_data(behaviour.input_path)
+    
+    # 3. process
+    result = process(data)
+    
+    # 4. output
+    write_output(result, behaviour.output_path)
+    
+    # 5. cleanup
+    cleanup()
+```
+
+### Jupyter-like Cells
+
+For scripts meant for interactive development, use `# %%` cell markers:
+
+```python
+# %% setup
+import ...
+constants = ...
+
+# %% get data
+data = fetch_data()
+
+# %% process
+results = process(data)
+
+# %% visualise
+plot(results)
+```
+
+### Generator Functions
+
+Use generators with `yield from` for nested iteration:
+
+```python
+def walk_targets(targets: list[Path]) -> Generator[Path, None, None]:
+    for target in targets:
+        if not target.exists():
+            print(f"warn: '{target}' does not exist, skipping", file=stderr)
+            continue
+        
+        if target.is_file():
+            yield target
+        elif target.is_dir():
+            print(f"info: recursively entering '{target}'", file=stderr)
+            yield from target.rglob("*")
+```
+
+### Nested Helper Functions
+
+For scoped logic that shouldn't be module-level:
+
+```python
+def process_document(doc: Document) -> Result[Output]:
+    def validate_section(section: Section) -> bool:
+        # Only used within process_document
+        return section.is_valid()
+    
+    def transform_content(content: str) -> str:
+        # Captures doc from outer scope
+        return content.replace(doc.old_pattern, doc.new_pattern)
+    
+    for section in doc.sections:
+        if not validate_section(section):
+            return Result(EMPTY, error=ValidationError(section))
+        section.content = transform_content(section.content)
+    
+    return Result(Output(doc))
+```
+
+### Progress Bars
+
+Use `tqdm` for progress bars, else use `rich` if already being used in the project.
+
+```python
+from tqdm import tqdm
+
+# Basic iteration
+for file in tqdm(files, desc="processing files"):
+    process(file)
+
+# With walrus operator
+for idx, char in (pbar := tqdm(enumerate(source), desc="pass 1: parsing", unit="chars")):
+    pbar.set_description(f"pass 1: {idx}/{len(source)}")
+
+# Parallel processing
+from tqdm.contrib.concurrent import process_map
+results = process_map(process_file, files, desc="converting", max_workers=4)
+```
+
+### pathlib Exclusively
+
+**Never use `os.path`; always use `pathlib.Path`:**
+
+```python
+from pathlib import Path
+
+# Relative to script location
+script_dir = Path(__file__).parent
+config_file = script_dir.joinpath("config.toml")
+
+# Home directory paths (XDG-like)
+cache_dir = Path.home().joinpath(".cache/project")
+data_dir = Path.home().joinpath(".local/share/project")
+config_dir = Path.home().joinpath(".config/project")
+
+# Create with parents
+cache_dir.mkdir(parents=True, exist_ok=True)
+
+# Modern Path operations
+if path.exists() and path.is_file():
+    content = path.read_text(encoding="utf-8")
+    path.write_text(new_content, encoding="utf-8")
 ```
 
 ## Workflow

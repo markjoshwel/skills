@@ -1,15 +1,17 @@
 ---
 name: js-bun-majo
-description: Use Bun instead of Node.js and npm for JavaScript/TypeScript development.
+description: Use Bun instead of Node.js and npm for JavaScript and TypeScript development. Use when writing JS/TS code to ensure Bun is used as the runtime, tooling, and package manager.
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
 ---
 
-# JavaScript/Bun Standards
+# JavaScript/TypeScript with Bun
 
 **Use Bun as the runtime, tooling, and package manager in lieu of Node and npm.**
+
+This applies to both JavaScript and TypeScript projects.
 
 If uncertain on how to invoke Bun commands, use the command line for help.
 
