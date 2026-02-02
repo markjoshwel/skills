@@ -35,19 +35,19 @@ trying not to overbloat the skills as per [best practices](https://platform.clau
 
 | skill | lines | words | status |
 |-------|-------|-------|--------|
-| `agents-md-authoring-majo` | 411 | 1780 | 🟢 |
-| `csharp-unity-majo` | 221 | 944 | 🟢 |
-| `docs-majo` | 501 | 1575 | 🟡 |
-| `git-majo` | 202 | 803 | 🟢 |
-| `js-bun-majo` | 81 | 428 | 🟢 |
-| `majo-standards` | 308 | 1360 | 🟢 |
-| `mdf-majo` | 444 | 1677 | 🟢 |
-| `public-domain-setup-majo` | 357 | 1605 | 🟢 |
-| `python-majo` | 335 | 1274 | 🟢 |
-| `shell-majo` | 460 | 1612 | 🟢 |
-| `skill-authoring-majo` | 437 | 1858 | 🟢 |
-| `task-planning-majo` | 266 | 1255 | 🟢 |
-| `windows-majo` | 451 | 1520 | 🟢 |
+| `agents-md-authoring-majo` | 401 | 1748 | 🟢 |
+| `csharp-unity-majo` | 210 | 914 | 🟢 |
+| `docs-majo` | 500 | 1569 | 🟢 |
+| `git-majo` | 201 | 798 | 🟢 |
+| `js-bun-majo` | 71 | 398 | 🟢 |
+| `majo-standards` | 307 | 1354 | 🟢 |
+| `mdf-majo` | 443 | 1671 | 🟢 |
+| `public-domain-setup-majo` | 346 | 1573 | 🟢 |
+| `python-majo` | 334 | 1267 | 🟢 |
+| `shell-majo` | 450 | 1583 | 🟢 |
+| `skill-authoring-majo` | 436 | 1852 | 🟢 |
+| `task-planning-majo` | 265 | 1250 | 🟢 |
+| `windows-majo` | 440 | 1492 | 🟢 |
 
 run `count.py` to update this table.
 

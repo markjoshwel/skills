@@ -9,7 +9,6 @@ license: Unlicense
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
-  tags: [standards, core, conventions, universal, quality]
 ---
 
 # Mark's Development Standards

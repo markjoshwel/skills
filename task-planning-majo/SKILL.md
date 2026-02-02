@@ -6,7 +6,6 @@ description: |
   a task involves multiple files, unclear requirements, or significant architecture 
   decisions. Triggers include multi-step implementations, refactoring across 
   codebase, feature design, or when the approach is ambiguous.
-tags: [planning, workflow, complex-tasks, project-management]
 license: Unlicense
 metadata:
   author: mark@joshwel.co

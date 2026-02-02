@@ -1,17 +1,6 @@
 ---
 name: public-domain-setup-majo
 description: Set up public domain repositories with dual licensing (Unlicense OR 0BSD).
-triggers:
-  - "public domain"
-  - "repository setup"
-  - "dual licensing"
-  - "Unlicense"
-  - "0BSD"
-  - "new repository"
-  - "init repository"
-  - "license setup"
-  - "SPDX license"
-tags: [licensing, public-domain, repository, unlicense, 0bsd]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>

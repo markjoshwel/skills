@@ -10,7 +10,6 @@ license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
-  tags: [skills, authoring, workflow, patterns, reusable]
 ---
 
 # Skill Authoring Guide (Mark)

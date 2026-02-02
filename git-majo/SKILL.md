@@ -8,7 +8,6 @@ description: |
   or when performing any git operation.
   Covers commit message format, auto-commit policy, and push behavior.
 license: Unlicense OR 0BSD
-tags: [git, version-control, commits, workflow]
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"

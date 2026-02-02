@@ -1,17 +1,6 @@
 ---
 name: windows-majo
 description: Windows-specific development standards and command alternatives.
-triggers:
-  - "Windows path"
-  - "Windows system"
-  - "win32 platform"
-  - "B:\\path"
-  - "C:\\path"
-  - "Unix-isms"
-  - "PowerShell"
-  - "cmd.exe"
-  - "backslash path"
-tags: [windows, platform, powershell, cross-platform]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>

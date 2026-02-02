@@ -11,7 +11,6 @@ metadata:
   author: Mark Joshwel <mark@joshwel.co>
   version: "2026.2.2"
   requires: python>=3.10
-  tags: [python, standards, uv, basedpyright, ruff, type-checking]
 ---
 
 # Python Development Standards (Mark)

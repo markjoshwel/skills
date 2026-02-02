@@ -4,7 +4,6 @@ description: |
   Documentation writing standards for Mark's projects.
   Use when writing READMEs, changelogs, API docs, or user-facing documentation.
   Covers writing style, formatting, structure, and tone.
-tags: [documentation, writing, readme, markdown, style]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>

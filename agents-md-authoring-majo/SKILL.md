@@ -1,16 +1,6 @@
 ---
 name: agents-md-authoring-majo
 description: Write effective AGENTS.md files for AI coding agents.
-triggers:
-  - "create AGENTS.md"
-  - "update AGENTS.md"
-  - "AGENTS.md file"
-  - "agents.md authoring"
-  - "writing AGENTS.md"
-  - "AI agent context"
-  - "project context file"
-  - "agent documentation"
-tags: [agents-md, documentation, project, vercel]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>

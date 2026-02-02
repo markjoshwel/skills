@@ -2,7 +2,6 @@
 name: mdf-majo
 description: Meadow Docstring Format (MDF) specification for Python documentation. Use when writing, editing, or reviewing docstrings for Python code. Provides a plaintext-first, readable format that closely follows Python syntax. Trigger when the user mentions docstrings, Python documentation, function documentation, class documentation, or writing documentation for Python code.
 license: Unlicense
-tags: [python, docstrings, documentation, mdf, meadow]
 metadata:
   author: mark@joshwel.co
   version: "2026.2.2"

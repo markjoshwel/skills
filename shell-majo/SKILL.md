@@ -1,16 +1,6 @@
 ---
 name: shell-majo
 description: POSIX shell scripting standards for Mark's workflow.
-triggers:
-  - "writing shell script"
-  - "shell scripting"
-  - "bash script"
-  - "POSIX sh"
-  - ".sh file"
-  - "#!/bin/sh"
-  - "#!/bin/bash"
-  - "shell command"
-tags: [shell, scripting, posix, bash]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>

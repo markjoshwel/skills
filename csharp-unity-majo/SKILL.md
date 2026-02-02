@@ -1,17 +1,6 @@
 ---
 name: csharp-unity-majo
 description: C# and Unity development standards for Mark's projects.
-triggers:
-  - "C# code"
-  - "Unity development"
-  - "game development"
-  - "Unity script"
-  - "MonoBehaviour"
-  - "csharp"
-  - ".cs file"
-  - "Unity project"
-  - "Debug.Log"
-tags: [csharp, unity, game-development, mono]
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
