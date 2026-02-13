@@ -7,7 +7,7 @@ description: |
 license: Unlicense OR 0BSD
 metadata:
   author: Mark Joshwel <mark@joshwel.co>
-  version: "2026.2.2"
+  version: "2026.2.14"
 ---
 
 # documentation writing standards
@@ -44,6 +44,7 @@ plaintext in a code editor—not just in preview mode.
 - [ ] Proper code block language tags
 - [ ] Voice and tone matches examples
 - [ ] Structure follows document type patterns
+- [ ] Multiline lists use two-space linebreak format (not em-dash inline)
 
 ---
 
@@ -118,6 +119,16 @@ type information :D
 - `-` for unordered lists
 - `1.` for ordered lists
 - 4 spaces for nested items
+
+**multiline list items** — use two-space linebreak for descriptions:
+
+```markdown
+- **feature name**  
+  description goes here
+
+- `--flag-name`  
+  what this flag does
+```
 
 ### links
 
