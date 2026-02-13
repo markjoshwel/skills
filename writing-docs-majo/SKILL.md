@@ -44,7 +44,9 @@ plaintext in a code editor—not just in preview mode.
 - [ ] Proper code block language tags
 - [ ] Voice and tone matches examples
 - [ ] Structure follows document type patterns
-- [ ] Multiline lists use two-space linebreak format (not em-dash inline)
+- [ ] **Multiline lists use two-space linebreak format** (NOT em-dash `—` inline)
+  - WRONG: `- **item** — description`
+  - CORRECT: `- **item**  \n  description`
 
 ---
 
@@ -128,6 +130,17 @@ type information :D
 
 - `--flag-name`  
   what this flag does
+```
+
+**common mistake** — do NOT use em-dash for inline descriptions:
+
+```markdown
+<!-- WRONG -->
+- **feature name** — description here
+
+<!-- CORRECT -->
+- **feature name**  
+  description here
 ```
 
 ### links
