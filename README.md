@@ -19,9 +19,9 @@ ln -s "$PWD/skills/skills/"* ~/.claude/skills/   # Claude Code
 ln -s "$PWD/skills/skills/"* ~/.codex/skills/    # Codex
 ```
 
-## Judges
+## Delegates
 
-`hillclimb` uses the judges you name in the request: "hill climb this with
+`hillclimb` uses the delegates you name in the request: "hill climb this with
 one Sol and one Opus". To set a default panel, put it in your `CLAUDE.md` or
 `AGENTS.md`. With neither, it picks two strong models from different
 providers.
@@ -30,3 +30,8 @@ providers.
 
 Based on Theo's videos on prompting, skills, and hill climbing, and on his
 [tstack](https://github.com/t3dotgg/tstack) skills.
+
+`hillclimb` is tstack's `council` skill with most of its text kept as
+written. The changes: any number of delegates from any providers, and a
+score bar to climb to. tstack is MIT licensed; its license is in
+`skills/hillclimb/LICENSE.tstack`.

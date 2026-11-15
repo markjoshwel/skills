@@ -5,73 +5,62 @@ description: Trigger this if the user says "hill climb" or "hillclimb".
 
 # Hillclimb
 
-The user wants something made better by measurement, not by one pass of your
-own judgment: a UI, a flaky prompt, tool descriptions, a slow path. Find a
-score you can measure yourself, then loop until it clears the bar.
+Improve the work in rounds until a panel of delegates scores it at or above
+the user's bar. If a program can give the score instead (tests, an eval, a
+timer), use it in place of delegates and loop the same way.
 
-If the user did not clearly ask for a hill climb, do not start one. These
-loops can run for hours.
+Before a round, address outstanding PR comments, fix known issues, and run
+relevant checks. Give the delegates the updated implementation; do not defer
+known fixes until reviews return. If the user wants to discard the
+implementation and explore new ideas, skip fixes to code being replaced.
 
-Take the bar and the budget from the request. With no bar, use 9 out of 10
-from every judge. Running out of budget is not a pass.
+Bring in delegates to score the work. If the user's request or instructions
+name them, use those. Otherwise use two strong models from different
+providers, at high reasoning effort, for example GPT Sol and Claude Opus.
+Any number of delegates works.
 
-## The score
+In T3 Code, use `orchestrator_capabilities` to resolve the models, then
+`delegate_task` to start one delegate per model in parallel. Elsewhere, use
+the harness's subagent tools. If a named delegate is unavailable, report it
+instead of substituting.
 
-A program is best: tests, an eval, a timer, a byte count. For a prompt or
-tool descriptions, build the eval from the times a model did the wrong thing
-in the user's session history. Run it before you change anything, so you
-have a baseline.
+Give each delegate the request and relevant context. Keep their work
+read-only. Ask each delegate for a score out of 10. When you can, give them
+something to compare against: the version before, and any alternatives the
+user points at. Scores given with nothing to compare against run high. Do
+not tell delegates the score you are trying to hit.
 
-Use judges only where no program can score, like design or writing.
+Do not wait idle. When a result arrives, check its findings against the code
+at once and decide what to fix while the other delegates run. Do not edit
+files while a delegate still reviews the same checkout. If the user's
+instructions mark a delegate as non-blocking, do not wait for it; treat a
+late result as feedback and do not record its score.
 
-## Judges
+Count each full review pass as one round.
+A fresh review after fixes starts a new round.
 
-Use the judges the user names. Otherwise use the panel in their `CLAUDE.md`
-or `AGENTS.md`. Otherwise use two strong models from different providers,
-for example GPT Sol and Claude Opus. Any number works, including one.
+If you agree with their recommendations, make the changes and request a fresh
+review after. Continue this process until every delegate's score meets the
+bar. The bar is the score the user asked for. If they gave none, use 9 out
+of 10.
 
-In T3 Code, resolve the models with `orchestrator_capabilities` and start
-one `delegate_task` per judge in parallel. Elsewhere, use the harness's
-subagent tools. If a named judge is unavailable, report it instead of
-substituting.
-
-Start fresh judges each round. Give them the output itself (screenshots,
-raw replies), not your summary. Ask for a score from 1 to 10 per category
-and what would raise it. Keep them read-only.
-
-Put the old version and the best alternatives in the same panel. A judge
-gave a UI 9 alone, and 7.4 next to two competing apps.
-
-Do not tell judges the bar. A judge that knows the target drifts toward it.
-If a judge gives no score, write `no score`. Do not invent one.
-
-When usage is tight, run one judge until it passes, then add the next.
-
-## The loop
-
-Measure, fix the lowest score first, measure again. Check each finding
-before you act on it, because judges are sometimes wrong. Decline feedback
-that grows the change past what the user asked for. A note from the user
-beats the judges.
-
-Scores are noisy. Measure again before you call the bar met.
-
-For text that loads into a model's context, cut after the bar is met:
-delete as much as you can while the score holds.
-
-## Report
-
-Lead with the verdict, then the scores per round, then before and after
-side by side. If the work ends in a pull request, put the table in the
-description:
+If the work ends in a pull request, put the results in the PR description.
+Put this section before the model and harness line at the end:
 
 ```markdown
 ## Hillclimb
 
-Bar: every judge 9 or higher. Rounds: 3
+Bar: 9/10. Rounds: 2
 
-| Judge | Baseline | Round 1 | Round 2 | Round 3 |
-| --- | --- | --- | --- | --- |
-| GPT Sol | 6.5 | 8 | 9 | 9 |
-| Claude Opus | 6 | not run | 8 | 9 |
+| Delegate | Round 1 | Round 2 |
+| --- | --- | --- |
+| GPT Sol | 7/10 | 9/10 |
+| Claude Opus | 6/10 | 9/10 |
 ```
+
+If a delegate gives no score, write `no score`. Do not invent one.
+If the PR is open, edit the description. Do not post a comment for this.
+If there is no PR, put the same results in the final reply only.
+
+Do not let repeated reviews result in scope creep. It is your job to fight to
+keep scope limited.
