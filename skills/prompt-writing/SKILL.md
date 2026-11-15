@@ -40,8 +40,6 @@ Add a limit only where a run goes wrong without it:
   smallest change that works. Push back on feedback that grows the scope."
 - A grant. Models balk at risky steps like merging unless the permission is
   in their context.
-- Room to disagree. "If you think this is a good idea, do it. Otherwise,
-  suggest something else."
 
 Give each rule its reason, so the reader can apply it to cases you did not
 list. Cut any sentence that could sit unchanged in a different prompt, like
@@ -50,6 +48,21 @@ complete. Leave them out, or ask.
 
 The reader copies the style it reads. Plain words, short sentences, no em
 dashes.
+
+## Who reads it
+
+Write for the model that will run the prompt. If you do not know which,
+write for Opus.
+
+Opus does what it is told. It checks everything, does not question the
+task, and does not stop on its own. Bound it: say what is out of scope and
+when to stop, and add "If you think this is a good idea, do it. Otherwise,
+suggest something else." Best when the result can be proven.
+
+Fable is smarter and lazier. Keep it loose: give the goal, leave the method
+open, and say wacky ideas are welcome. It can skim and let small things
+slide, so put the few things it must not miss first and ask for proof. Best
+for taste, open problems, and a thread that runs in circles.
 
 ## A brief for another agent
 
